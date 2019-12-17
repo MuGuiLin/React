@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基于浏览器&lt;script>引入方式 - JSX语法</title>
+    <link rel="stylesheet" href="./css/base.css">
+</head>
+
+<body>
+    <h1>基于浏览器&lt;script>引入方式 - JSX语法-循环时的key</h1>
+    <hr />
+
+    <div id="app"></div>
+
+    <!-- react.js 核心库 开发版 -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- react-dom.js 用于和浏览器 dom 相关操作、渲染等 -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- babel.js 用于语法转换，把一些特定的语法转换为标准的js语法，如：JSX、TS、ES6/7/8/9 to ES5等 -->
+    <script src="./js/babel.min.js"></script>
+
+    <!-- type="text/babel" 指定浏览器 通过babel编译后 来执行 -->
+    <script type="text/babel">
+        //<script type="text/javascript"> 默认是标准的JS语法 -->
+
+        /* React 组件使用一个名为 render() 的方法，接收输入的数据并返回需要展示的内容。在示例中这种类似 XML 的写法被称为 JSX。被传入的数据可在组件中通过 this.props 在 render() 访问。
+            JSX
+                JavaScript + XML
+
+            JSX 会通过编译器，最终转成一个JS对象，也就是所谓的 VDOM (虚拟DOM[可以节省性能的开销])
+                - JSX最外层有且只能有一个标签包起来
+                - JSX中可以使用{表达式} 嵌入JavaScript表达式，如：变量、运算符、函数调用
+                - 注：是表达式，不是语句(if, for, while等)！！！
+
+            循环渲染时的key
+                - key是用于唯一标识数据用的，如排序等
+        */
+
+
+        let app = document.querySelector('#app');
+
+        let css = { color: 'white', textAlign: 'left', fontSize: '18px', 'lineHeight': '36px', background: 'blue' };
+
+
+        // 内部函数式组件
+        let List = (list) => {
+            return <ul style={css}>
+                {
+                    list.data.map((o, i) => {
+                        // 注：如果循环渲染时不加key的话，只会改变其内容  并且React会发出警告：react.development.js:255 Warning: Each child in a list should have a unique "key" prop.
+                        //【注：不要索引 i 来当作key 因为数组的索引是不会变的，】
+                        // return <li>
+                        return <li key={i}>
+                            <label>
+                                {i + 1}、
+                                <input type="checkbox" value={o.rmb} />
+                                {o.name}
+                            </label>
+                        </li>
+                    })
+                }
+            </ul>;
+        }
+
+        let List2 = (list) => {
+            return <ul style={css}>
+                {
+                    list.data.map((o, i) => {
+                        // 注：如果加了key则改变dom【注:key 必须是唯一值，一般都用id，或者 用能跟着数据一起走的值】
+                        return <li key={o.id}>
+                            <label>
+                                {i + 1}、
+                                <input type="checkbox" value={o.rmb} />
+                                {o.name}
+                            </label>
+                        </li>
+                    })
+                }
+            </ul>;
+        }
+
+        // 内部类式组件
+        class App extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    arr: [
+                        {
+                            id: 101,
+                            rmb: 58,
+                            name: 'HTML5'
+                        },
+                        {
+                            id: 102,
+                            rmb: 165,
+                            name: 'CSS3'
+                        },
+                        {
+                            id: 103,
+                            rmb: 209,
+                            name: 'ECMASCRIPT6'
+                        }
+                        ,
+                        {
+                            id: 104,
+                            rmb: 88,
+                            name: 'NODE.JS'
+                        }
+                    ]
+                }
+            };
+
+            render() {
+                return <div className="array">
+
+                    没有加key： 如果循环渲染时不加key的话，只会改变其内容【注：不要索引 i 来当作key 因为数组的索引是不会变的】
+                    {
+                        List({ data: this.state.arr }) /*调函数式组件方式1*/
+                        //List2({ data: this.state.arr }) /*调函数式组件方式1*/
+                    }
+
+                    加了key：如果加了key则改变dom【注:key 必须是唯一值，所以一般都用id，或者 用能跟着数据一起走的值】
+                    {/*<List data={this.state.arr} /> 调函数式组件方式2*/}
+                    <List2 data={this.state.arr} />  {/*调函数式组件方式2*/}
+
+                    <button onClick={() => {
+                        this.setState({
+                            arr: this.state.arr.sort((a, b) => {
+                                return Math.random() - 0.5;
+                            })
+                        })
+                    }}>选中后排序</button>
+                </div>
+
+            };
+        };
+
+
+        ReactDOM.render(
+            <div className="dom">
+                <App />{/*调用类式组件*/}
+            </div>,
+            app
+        );
+    </script>
+</body>
+
+</html>

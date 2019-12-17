@@ -38,6 +38,8 @@
                 - 注：是表达式，不是语句(if, for, while等)！！！
         */
 
+        let id = 'box';
+
         let app = document.querySelector('#app');
 
         let num = 1024;
@@ -47,6 +49,8 @@
         let ele = <div>我是一个<b style={{ color: 'blue' }}>DIV</b>标签</div>;
 
         let arr = new Array(5).fill(' 数组 ');  //数组会转成字符串 [].join(''), 并且去掉了,逗号  [数组]在JSX中可用 map() 循环
+
+        let css = { color: 'white', textAlign: 'left', fontSize: '18px', background: 'blue' };
 
         let obj = {                          //对象 { key: value }在JSX中可用 Object.keys() 循环
             html: {
@@ -70,7 +74,14 @@
             obj[key].attr.forEach((o, i) => {
                 console.log(o)
             })
-        })
+        });
+
+        // for (const key of obj) {
+        //     console.log(obj[key])
+        //     for (const key of obj[key].attr) {
+        //         console.log(obj[key].attr[key])
+        //     }
+        // }
 
         let fun = (len) => {
             // let li = [];
@@ -88,7 +99,8 @@
 
 
         ReactDOM.render(
-            <div id="box" className="dom" >我是div
+            // JSX是一种声明式编程
+            <div id={id} className="dom" >我是div
 
                 <h1 style={{ color: 'red', textAlign: 'left', fontSize: '24px' }}>666</h1>
                 <p>注：JSX最外层有且只能有一个标签包起来哦</p>
@@ -108,7 +120,7 @@
 
                     <ul>{fun(6)}</ul>
 
-                    <ol>
+                    <ol style={css}>
                         {
                             fun(6).map((item, index) => {
                                 return (
@@ -140,7 +152,6 @@
                                 </dl>
                             )
                         })
-
                     }
                 </div>
 
