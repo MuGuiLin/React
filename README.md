@@ -1,6 +1,6 @@
 # React介绍
 
-![img](./assets/logo.jpg)
+![img](https://raw.githubusercontent.com/MuGuiLin/React.js/master/logo.jpg)
 
 一个用于构建用户界面的 <u>JavaScript</u> 库
 
