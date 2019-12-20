@@ -1,6 +1,5 @@
-menu{position: fixed; top: 0; left: 0; bottom: 0; width: 280px; background: rgba(97, 218, 251, 1);}
-
+menu{ text-align: center; background: rgba(97, 218, 251, 1);}
 menu h1{ line-height: 100px;}
-menu nav{}
+menu nav{padding-left: 30px; }
 menu nav a{ display: block; height: 80px; line-height: 80px; font-size: 18px; border-bottom: 1px dashed white; transition: all .3s linear;}
 menu nav a.show, menu nav a:hover{background: #282c34; color: rgb(0, 196, 26); font-size: 24px; font-weight: bold;}

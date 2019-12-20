@@ -8,7 +8,7 @@ export default class About extends React.Component {
     render() {
         console.log(this.props)
         return(
-            <section className="about">
+            <section className="views-box">
                 <h1>关于我</h1>
                 <hr></hr>
 
