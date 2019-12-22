@@ -13,7 +13,7 @@ export default class Menu extends React.Component {
                 href: '/'
             }, {
                 name: '关 于',
-                href: '/about'
+                href: '/about/666'
             }, {
                 name: '我 的',
                 href: '/self'

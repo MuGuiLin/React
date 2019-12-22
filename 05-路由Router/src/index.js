@@ -19,14 +19,14 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     // 历史记录路由方式 - 有历史记录 基于HTML5的
-    // <BrowserRouter>
-    //     <App />
-    // </BrowserRouter>
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 
     // 哈希路由方式 - 无历史记
-    <HashRouter>
-        <App />
-    </HashRouter>
+    // <HashRouter>
+    //     <App />
+    // </HashRouter>
     
     , document.getElementById('root'));
 

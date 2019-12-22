@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Item from "../components/Item";
+
 import '../static/css/goods.css';
 
 export default class Goods extends React.Component {
@@ -30,17 +32,20 @@ export default class Goods extends React.Component {
                         <span>操作</span>
                     </li>
                     {
-                        list.items.map((item, index) => {
-                            return (<li key={item.id}>
-                                <span>{item.id}</span>
-                                <span>{item.name}</span>
-                                <span>￥{(item.price / 100).toFixed(2)}</span>
-                                <span>
-                                    <button>详情信息</button>
-                                </span>
+                        // list.items.map((item, index) => {
+                        //     return (<li key={item.id}>
+                        //         <span>{item.id}</span>
+                        //         <span>{item.name}</span>
+                        //         <span>￥{(item.price / 100).toFixed(2)}</span>
+                        //         <span>
+                        //             <button>详情信息</button>
+                        //         </span>
+                        //     </li>)
+                        // })
 
-                            </li>)
-                        })
+
+                        // 将列表拆分为一个独立的功能组件
+                        list.items.map((item, index) => <Item key={item.id} item={item}></Item>)
                     }
                 </ul>
             </section>

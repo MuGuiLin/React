@@ -7,6 +7,7 @@ import Home from '../views/Home';
 import About from '../views/About';
 import Self from '../views/Self';
 import Goods from '../views/Goods';
+import View from "../views/View";
 
 import '../static/css/App.css';
 
@@ -28,32 +29,38 @@ const myGoods = {
     {
       id: 1,
       name: 'iPhone XR',
-      price: 542500
+      price: 542500,
+      image: 'http://img.yzcdn.cn/upload_files/2018/10/02/FoDSUZxgvASb3gkEcY49s7G8rP5X.jpg?imageView2/2/w/580/h/580/q/75/format/jpg'
     },
     {
       id: 2,
       name: 'Apple iPad Air 3',
-      price: 377700
+      price: 377700,
+      image: 'http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190322/bf58e2bfc02049938ed53ca3a225faf2.jpg'
     },
     {
       id: 3,
       name: 'Macbook Pro 15.4',
-      price: 1949900
+      price: 1949900,
+      image: 'http://pic7.58cdn.com.cn/zhuanzh/n_v1bkuymcyzthvvqylqifza_750_0.jpg'
     },
     {
       id: 4,
       name: 'Apple iMac',
-      price: 1629900
+      price: 1629900,
+      image: 'http://news.mydrivers.com/img/20091122/02404674.jpg'
     },
     {
       id: 5,
       name: 'Apple Magic Mouse',
-      price: 72900
+      price: 72900,
+      image: 'http://img4.imgtn.bdimg.com/it/u=3557298481,916986847&fm=26&gp=0.jpg'
     },
     {
       id: 6,
       name: 'Apple Watch Series 4',
-      price: 599900
+      price: 599900,
+      image: 'http://wx2.sinaimg.cn/wap720/a7807f15ly1fwp3z56uiuj21bh0qogsq.jpg'
     }
   ]
 }
@@ -133,8 +140,8 @@ function App() {
       }}></Route>
 
 
-      {/* 第4种、页面路由渲染方式 - 有路由，可以传参，并可以在路由中传参(动态路由传参) */}
-      <Route path="/about" render={() => {
+      {/* 第4种、页面路由渲染方式 - 有路由，可以传参，并可以在路由中传参(动态路由传参) 注：在 /: 后面就是参数名，这是要在<Link/>中去设置参数值哦！！ */}
+      <Route path="/about/:mupiao" render={() => {
         return <About data={myData}></About>
       }}></Route>
 
@@ -146,6 +153,23 @@ function App() {
       <Route path="/goods" render={() => {
         return <Goods goods={myGoods} ></Goods>
       }}></Route>
+
+      {/* (动态路由传参) 注：在 /: 后面就是参数名，这是要在<Link/>中去设置参数值,(\d+) 是正则，表示传递的参数是只能是数字 */}
+      {/* <Route path="/view/:goods_id(\d+)" component={View} /> */}
+
+      {/* 由于除了要向View组件传goods_id以外，还要传一些其他数据，所以有要用到render() */}
+      <Route path="/view/:goods_id(\d+)" render={(props) => {
+        // props参数中的值
+          // - history 里面包括的返回上一个页面的方法goBack()
+          // - location 和原生的location一样
+          // - match 当前页面路由的相关信息
+          // - staticContext
+        console.log(props)
+        // return <View history={props.history} location={props.location} match={props.match} data={myGoods}></View>
+        
+        // 由于上面这种传递的数据太多，写起来复杂，所以可以像下面这样简写 解构
+        return <View {...props} data={myGoods} ></View>
+      }} />
         
       
     </section>

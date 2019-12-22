@@ -7,7 +7,7 @@ li {
     list-style: none;
 }
 
-.item-list {
+.item-list, .views-box {
     padding: 0 30px;
 }
 
@@ -28,8 +28,40 @@ li {
     min-width: 200px;
 }
 
+.views-box h2{
+    color: purple;
+}
+
+.views-box img {
+    padding: 10px;
+    border: 1px solid #dcdfe6;
+    border-radius: 12px;
+}
+
+.views-box p{
+    font-size: 18px;
+}
+
+.views-box i{
+    color: #c40079;
+}
+
+.views-box b{
+    font-size: 24px;
+    color: #00c41a;
+}
+
+.views-box button{
+    float: right;
+    padding: 2px 10px;
+}
+
 .pagination {
     margin: 10px;
+}
+
+.item-list li span:nth-child(1) {
+    display: contents;
 }
 
 .pagination a {
