@@ -52,8 +52,18 @@ li {
 }
 
 .views-box button{
-    float: right;
     padding: 2px 10px;
+}
+
+.info-box button{
+    float: right;
+}
+
+.views-box select {
+    padding: 4px 10px;
+    width: 200px;
+    font-size: 16px;
+    height: 30px;
 }
 
 .pagination {
@@ -97,3 +107,4 @@ li {
     text-align: center;
     vertical-align: top;
 }
+

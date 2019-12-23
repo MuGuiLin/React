@@ -1,7 +1,7 @@
 import React from 'react';
 import '../static/css/menu.css';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 
 export default class Menu extends React.Component {
     constructor(props) {
@@ -15,25 +15,20 @@ export default class Menu extends React.Component {
                 name: '关 于',
                 href: '/about/666'
             }, {
-                name: '我 的',
-                href: '/self'
-            }, {
                 name: '商 品',
                 href: '/goods'
+            }, {
+                name: '购物车',
+                href: '/cart'
+            }, {
+                name: '我 的',
+                href: '/self'
             }]
         }
     };
 
     render() {
         console.log('location对象：', window.location, '--------------------哈希：',window.location.hash);
-
-        window.addEventListener('hashchange', (e) => {
-            // console.log('********监听哈希变化：', e.target.location);
-            // 点快了这里会有问题，待研究！
-            this.setState({
-                show:e.target.location.hash
-            })
-        });
 
         return (
             <menu>
@@ -59,9 +54,26 @@ export default class Menu extends React.Component {
                     <a href="/">刷 新</a>
                     {
                         this.state.menu.map((item, index) => {
+                            //原生<a>标签跳转
                             // return <a href={item.href} className={item.href == this.state.show ? 'show' : ''}>{item.name}</a>
+
+                            // <Link/>组件跳转，无高亮状态
                             // return <Link to={item.href} className={item.href == this.state.show ? 'show' : ''}>{item.name}</Link>
-                            return <Link to={item.href} className={'#' + item.href == this.state.show ? 'show' : ''}>{item.name}</Link>
+
+                            /* <NavLink/>导航跳转，有高亮状态有3个参数：
+                                - isActive 是一个回调函数，返回布尔值 【注：默认情况下，匹配的是URL与to的设置，当有子页面或孙子页面也要高亮时，就需要这个来自定义啦】 如：isActive={() =>{}}
+                                - activeStyle 高亮状态的样式 如：activeStyle={{color: 'red'}}
+                                - activeClassName 高亮状态的的className 如：activeClassName={'show'}
+
+                                以上的触发条件是：当URL中的路由和 to={}中的路由相同时触发【注：/ 是所有路由都会匹配成功能（因为默认是模糊匹配），所以要改为精确匹配：exact={true} 或 直接exact都行  https://reacttraining.com/react-router/web/api/NavLink/exact-bool】 
+                            */
+                            return <NavLink to={item.href} exact={true} activeClassName={'show'}>{item.name}</NavLink>
+
+                            // 当有子页面或孙子页面也要亮时，就是能用上面的默认条件了，需要自己添加条件
+                            // return <NavLink to={item.href} exact={true} isActive={(match, locat) => {
+                            //     console.log('当前匹配路径：',match, '当前URL中的信息：',locat);
+                            //     return  match || locat.pathname.startsWith('/view') ? true : false;
+                            // }}>{item.name}</NavLink>
                         })
                     }
                 </nav>
