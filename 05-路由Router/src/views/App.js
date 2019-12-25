@@ -158,8 +158,8 @@ function App() {
         <Route path="/self" render={() => <Self data={myUser}></Self>} />
 
 
-        <Route path="/goods" render={() => {
-          return <Goods goods={myGoods} ></Goods>
+        <Route path="/goods" render={(props) => {
+          return <Goods history={props.history} goods={myGoods} ></Goods>
         }}></Route>
 
 

@@ -67,10 +67,10 @@ export default class Menu extends React.Component {
 
                                 以上的触发条件是：当URL中的路由和 to={}中的路由相同时触发【注：/ 是所有路由都会匹配成功能（因为默认是模糊匹配），所以要改为精确匹配：exact={true} 或 直接exact都行  https://reacttraining.com/react-router/web/api/NavLink/exact-bool】 
                             */
-                            return <NavLink to={item.href} exact={true} activeClassName={'show'}>{item.name}</NavLink>
+                            return <NavLink key={item.href} to={item.href} exact={true} activeClassName={'show'}>{item.name}</NavLink>
 
                             // 当有子页面或孙子页面也要亮时，就是能用上面的默认条件了，需要自己添加条件
-                            // return <NavLink to={item.href} exact={true} isActive={(match, locat) => {
+                            // return <NavLink key={item.href} to={item.href} exact={true} isActive={(match, locat) => {
                             //     console.log('当前匹配路径：',match, '当前URL中的信息：',locat);
                             //     return  match || locat.pathname.startsWith('/view') ? true : false;
                             // }}>{item.name}</NavLink>

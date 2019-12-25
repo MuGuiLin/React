@@ -14,6 +14,7 @@ export default class Goods extends React.Component {
             sortVal: 'asc'
         }
         this.order = this.order.bind(this);
+
     };
 
     //数据排序
@@ -30,6 +31,15 @@ export default class Goods extends React.Component {
             sortVal: e.target.value,
             items: this.sort(e.target.value)
         });
+    };
+
+    getUrlPar() {
+        // 获取url地址?后面的参数: URLSearchParams()类，是原生中用于解析queryString的一个构造函数，实例化可通过get('参数名')，获取到对应的url参数值
+        // 获取url地址?后面的参数：还可以用 npm 中的qs模块https://www.npmjs.com/package/qs
+        
+        let search = window.location.search;
+        let qs = new URLSearchParams(search);
+        return qs.get('page') || 1;
     };
 
     render() {
@@ -72,7 +82,9 @@ export default class Goods extends React.Component {
                         items.map((item, index) => <Item key={item.id} item={item} sort={this.state.sortVal} ></Item>)
                     }
                 </ul>
-                <Page></Page>
+                <hr></hr>
+                {/* <Page history={this.props.history} pages={10} page={this.state.page} ></Page> */}
+                <Page pages={6} page={this.getUrlPar()}></Page>
             </section>
         )
     }
