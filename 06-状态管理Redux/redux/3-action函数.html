@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>action函数</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        pre{
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>action函数</h1>
+    <hr>
+    <pre>
+        前端应用越来越复杂，要管理和维护的数据也越来越多，为了有效的管理和维护应用中的各种数据，我们必须有一种强大而有效的数据管理机制，也称为状态管理机制，<u>Redux</u> 就是解决该问题的
+
+        Redux 是 JavaScript 状态容器，提供可预测化的状态管理。 (如果你需要一个 WordPress 框架，请查看 Redux Framework。)
+
+可以让你构建一致化的应用，运行于不同的环境（客户端、服务器、原生应用），并且易于测试。不仅于此，它还提供 超爽的开发体验，比如有一个时间旅行调试器可以编辑后实时预览。
+
+Redux（注：Redux本身不依赖React，而React-Redux会不依赖） 除了和 React 一起用外，还支持其它界面库。 它体小精悍（只有2kB，包括依赖）。
+
+    </pre>
+    <script src="./js/redux.js"></script>
+
+    <script>
+        /*
+            Redux几个核心概念：
+            # store：仓库，提供数据存储、管理等操作的对象，state、reducer、、action等都是store中的一个功能
+                - action：发送数据操作(增删改等)请求对象
+                - reducer：执行操作的对象
+                - state：存储数据的对象
+                以上3个对象的关系是：(使用 reducers 来根据 action 更新 state，而store 就是把它们联系到一起的对象 )
+        */
+
+        let users = [
+            {id: 1, name: '沐枫', age: 28},
+            {id: 2, name: '小明', age: 16},
+            {id: 3, name: '小强', age: 24}
+        ];
+
+        /*
+            创建仓库函数（用于存储、管理）等。
+            Redux.createStore()函数有两个参数：
+                - 参数1：reducre()函数，用于修改数据的方法，怎么改数据？
+                - 参数2：仓库中存储的初始化数据，怎么存数据？
+        */
+
+        /* const store = Redux.createStore(function(state, action) {
+            // 注: 在创建这个仓库函数时，这里就执行1次哦！！
+            // console.log(state);
+            // console.log(action);
+
+            switch(action.type) {
+                case 'AddUser':
+                    // 由于初始化数据是一个数组，所以添加数据时，也要用数组，
+                    // state.push(action.payload);
+                    // return state;
+                    // 注：一定不要像上面用 state.push(action.payload) 来添加哦，因为这样会影响上次的数据
+                    return [...state, action.payload];  //修改 并 返回仓库中的数据  这样就是上次的数据互不影响啦！更有得于测试的回归
+
+                    // 如果是对象时：
+                    // return {...state, ...action.payload}
+                    // 或者是：
+                    // Object.assign({}, ...state, ...action.payload)
+
+                default:
+                    return state; //返回仓库中的数据
+            }
+        }, users);
+        */
+
+
+        // 上面的这个创建仓库函数，还可以更优雅的分离出来
+        const reducre = (state, action) => {
+            console.log('reducre执行了', ++reducre.index, '次！')
+            switch(action.type) {
+                case 'AddUser':
+                    return [...state, action.payload];  //修改 并 返回仓库中的数据  这样就是上次的数据互不影响啦！更有得于测试的回归
+
+                default:
+                    return state; //返回仓库中的数据
+            }
+        };
+        reducre.index = 0; //这里我用来记录reducre执行次数的
+
+        const store = Redux.createStore(reducre, users);
+
+        // 通过Redux.createStore()函数后，得到一个对象，并赋值给store变量
+        console.dir(store);
+        /*
+            store对象中的方法
+                - dispatch: ƒ dispatch(action) 更新 state （分发 action。这是触发 state 变化的惟一途径）
+                - subscribe: ƒ subscribe(listener) 注册监听器，返回的函数注销监听器（只要数据发生变化时，这个函数都会执行，它返回一个函数）。
+                - getState: ƒ getState()    获取 state，用于
+                - replaceReducer: ƒ replaceReducer(nextReducer)
+                - Symbol(observable): ƒ observable()
+
+        */
+
+        // store.getState() 获取仓库的state数据 
+        console.log(store.getState());
+
+        // store.dispatch({type}) 更新仓库的state数据，注：store.dispatch()函数执行时，reducre()函数也会执行哦！！
+        /*
+            参数说明： 
+                - type 操作类型(将要执行的动作)，值可以自定义 注：type参数必传哦！
+
+        */
+
+        /*
+        store.dispatch({
+            type: 'AddUser',
+            payload: {
+                id: 4,
+                name: 'mupiao',
+                age: 32,
+                sex: '男'
+            }
+        });
+
+        console.log(store.getState());
+
+        store.dispatch({
+            type: 'AddUser',
+            payload: {
+                id: 5,
+                name: 'muguilin',
+                age: 22,
+                sex: '女'
+            }
+        });
+
+        console.log(store.getState());
+        */
+
+        // 由于每修改一次数据都要写一遍store.dispatch()。。。这样有点繁琐，所以可以做一个封装
+        /*
+            Action 本质上是 JavaScript 普通对象。
+            我们约定，action 内必须使用一个字符串类型的 type 字段来表示将要执行的动作。
+            多数情况下，type 会被定义成字符串常量。当应用规模越来越大时，建议使用单独的模块或文件来存放 action。
+        */
+
+        const AddUser = (data) => {
+            store.dispatch({
+                type: 'AddUser', 
+                payload: data
+            });
+            console.log(store.getState());
+        };
+
+        AddUser({ id: 4,  name: 'mupiao', age: 32, sex: '男' });
+        AddUser({ id: 5, name: 'muguilin', age: 22, sex: '女' });
+
+        // const subscribe =  store.subscribe(function(a, b, c) {
+        //     return store.getState()
+        //     console.log(a,b,c)
+        // })
+
+        // subscribe()
+
+
+    </script>
+</body>
+
+</html>
