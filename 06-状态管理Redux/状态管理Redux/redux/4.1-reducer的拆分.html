@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reducer的拆分</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        pre {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>reducer的拆分</h1>
+    <hr>
+    <script src="./js/redux.js"></script>
+
+    <script>
+        /*
+            随之着需求的不同，也数据结构也越来越复杂化，所以要进行拆分
+        */
+
+        let dataObj = {
+            users: [
+                { id: 1, name: '沐枫', age: 28 },
+            ],
+            items: [
+                {id: 01, title: 'xxx标题', content: 'xxx内容'}
+            ],
+            goods: [
+                {id: 1, goods: '弎', image: '../img/add.jpg'}
+            ]
+        };
+
+        const reducer = (state, action) => {
+            switch(action.type) {
+                case 'ADD_USER':
+                    return {
+                        // 注：这里的数据结构要一一对应哦，只修改要修改的数据，而不修改的数据一定要原封不动的返回去哦！！
+                        users: [...state.users, action.payload],
+                        items: state.items,
+                        goods: state.goods
+                    }
+                case 'ADD_ITEM':
+                    return {
+                        users:state.users,
+                        // 这里虽然是可以对应多种数据结构了，但是还不够细。
+                        // 比如：当要修改items下面的某一项时，还要保证不修改items中的其他项时，或更深层次的数据项时，
+                        // 这里就不够优雅了，所以要进行拆分
+                        items: [...state.items, action.payload],
+                        goods: state.goods
+                    }
+                default:
+                    return state;
+            };
+        };
+
+        const store = Redux.createStore(reducer, dataObj);
+
+        store.dispatch({
+            type: 'ADD_USER',
+            payload: { id: 2, name: '小明', age: 16 }
+        });
+
+        store.dispatch({
+            type: 'ADD_USER',
+            payload: { id: 3, name: '小强', age: 24 }
+        });
+
+        store.dispatch({
+            type: 'ADD_ITEM',
+            payload: {id: 02, title: '2.xxx标题', content: '2.xxx内容'}
+        });
+
+        console.log(store.getState());
+
+
+
+
+    </script>
+</body>
+
+</html>

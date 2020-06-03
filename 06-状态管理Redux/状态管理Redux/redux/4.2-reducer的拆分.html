@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reducer的拆分2</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        pre {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>reducer的拆分2</h1>
+    <hr>
+    <script src="./js/redux.js"></script>
+
+    <script>
+        /*
+            随之着需求的不同，也数据结构也越来越复杂化，所以要进行拆分
+        */
+
+        let dataObj = {
+            users: [
+                { id: 1, name: '沐枫', age: 28 },
+            ],
+            items: [
+                { id: 01, title: 'xxx标题', content: 'xxx内容' }
+            ],
+            goods: [
+                { id: 1, goods: '弎', image: '../img/add.jpg' }
+            ]
+        };
+
+        // 拆分添加用户
+        const usersReducer = (state, action) => {
+            // console.log(action)
+            switch (action.type) {
+                // 添加用户
+                case 'ADD_USER':
+                    return [...state, action.payload];
+
+                // 修改某个用户的名字
+                case 'UP_USER_NAME':
+                    console.log(action.index)
+                    return [...state, action.payload]
+
+                default:
+                    return state;
+            };
+        };
+
+        // 拆分添加列表
+        const itemsReducer = (state, action) => {
+            switch (action.type) {
+                case 'ADD_ITEM':
+                    return [...state, action.payload];
+
+                default:
+                    return state;
+            };
+        };
+
+        // 拆分添加商品
+        const goodsReducer = (state, action) => {
+            switch (action.type) {
+                case 'ADD_GOOD':
+                    return [...state, action.payload];
+
+                default:
+                    return state;
+            };
+        };
+
+        // 合并以上各个添加方法
+        const reducer = (state, action) => {
+            return {
+                users: usersReducer(state.users, action),
+                items: itemsReducer(state.items, action),
+                goods: goodsReducer(state.goods, action)
+            }
+        };
+
+        // 上面合并的reducer方法在，在Redux中也有提供combineReducers()方法来合并哦！！
+        // const reducer = Redux.combineReducers({
+        //     users: usersReducer,
+        //     items: itemsReducer,
+        //     goods: goodsReducer
+        // })
+
+        // 因为在Redux.createStore()函数中，只能有一个reducer方法
+        const store = Redux.createStore(reducer, dataObj);
+
+        store.dispatch({
+            type: 'ADD_USER',
+            payload: { id: 2, name: '小明', age: 16 }
+        });
+
+        store.dispatch({
+            type: 'ADD_USER',
+            payload: { id: 3, name: '小强', age: 24 }
+        });
+
+        store.dispatch({
+            type: 'ADD_ITEM',
+            payload: { id: 02, title: '2.xxx标题', content: '2.xxx内容' }
+        });
+
+        console.log(store.getState());
+
+
+        //修改数据
+        store.dispatch({
+            type: 'UP_USER_NAME',
+            payload: { id: 3, name: '小顺子', age: 24 },
+            index: 1
+        });
+
+        console.log(store.getState());
+
+    </script>
+</body>
+
+</html>
