@@ -1,0 +1,11 @@
+h1 {
+    text-align: center;
+}
+article {
+    pre {
+        code {
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+    }
+}

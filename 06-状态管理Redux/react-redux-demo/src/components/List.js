@@ -8,6 +8,7 @@ import List from '@material-ui/core/List';
 import {connect} from 'react-redux';
 
 import Item from './Item';
+import store from '../store';
 
 class Lists extends React.Component {
     constructor(props) {
@@ -29,6 +30,14 @@ class Lists extends React.Component {
 
         text.value = "";
     };
+
+    componentDidMount() {
+        store.subscribe(() => {
+            console.log('state发生变化啦!');
+
+            this.forceUpdate() //强制刷新视图
+        })
+    }
 
     render() {
         console.log(this.props)

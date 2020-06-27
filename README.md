@@ -16,7 +16,17 @@
 
 - `React` 采用了声明式编程范式，可以更加方便的构建 `UI` 应用
 - 内部封装更加高效的与底层`DOM`进行交互的逻辑，提高性能的同时也能帮助我们更加专注于业务
-- 可以很好的接纳其它框架或库与其进行配合
+- 可以很好的接纳其它框架或库与其进行配合。
+
+- React负责逻辑控制，数据 -> VDOM(虚拟DOM)
+- ReactDom渲染实际DOM，VDOM -> DOM
+- React使用JSX来描述UI
+- babel-loader把JSX 编译成相应的 JS 对象，React.createElement再把这个JS对象构造成React需要的虚拟dom。
+
+## JSX
+JSX是⼀种JavaScript的语法扩展，其格式比较像模版语言，但事实上完全是在JavaScript内部实现的。
+JSX可以很好地描述UI，能够有效提高开发效率，
+px
 
 
 
@@ -26,3 +36,6 @@
 - `create-react-app` : 脚手架，提供一套用于快速 构建和打包 `React` 项目的工具
 - `react-router` : 基于 `React` 的路由库
 - `redux、react-redux` : 状态管理库
+
+- npx create-react-app my-app  // 创建项目
+- npm run eject  // 暴露配置项

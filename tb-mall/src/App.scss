@@ -1,0 +1,11 @@
+.App {
+    .main {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        bottom: 50px;
+        left: 0;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+}

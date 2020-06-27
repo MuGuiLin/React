@@ -15,6 +15,14 @@ import goods from './reducer/goods';
     react-redux：
         redux和react并没直接关系，redux是一个独立的js状态管理库，但如果要在react中使用redux还需要另外再安装react-redux
         npm i -S redux react-redux
+
+    方法说明：
+    createStore() 创建store
+    combineReducers() 初始化、修改状态
+    
+    getState() 获取状态值
+    dispatch() 提交更新状态
+    subscribe() 变更订阅
 */
 
 
