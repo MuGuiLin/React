@@ -16,6 +16,8 @@
     什么是JSX：
     JSX = JavaScript + XML
 
+    虚拟DOM：就是一种描述如何创建DOM结构描述信息
+
     <div id="app"></div>
 
     <!-- react.js 核心库 开发版 -->
@@ -44,6 +46,7 @@
         let dom = <div id="box" className="dom" >我是div
                     <h1 style={{color: 'red', textAlign: 'left', 'font-size': '24px'}}>JSX我是H1</h1>
                 </div>;
+        //虚拟DOM:
         console.dir(dom);
 
         ReactDOM.render(

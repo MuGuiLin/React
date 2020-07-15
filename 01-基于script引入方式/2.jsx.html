@@ -16,6 +16,16 @@
     什么是JSX：
     JSX = JavaScript + XML
 
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.js"></script> -->
+    
+    
+    <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>-->
+    <!-- <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>  -->
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+
+
     <div id="app"></div>
 
     <!-- react.js 核心库 开发版 -->
@@ -36,10 +46,13 @@
                 JavaScript + XML
         */
         ReactDOM.render(
-            <div>我是div
-                <h1>666</h1>
-                <p>注：JSX最外层只能有一个标签包起来哦</p>
-            </div>,
+            <React.Fragment>我是div
+                <h1 className="add">666</h1>
+                {
+                    // <p>注：JSX最外层只能有一个标签包起来哦</p>
+                      [1, 2, 3]
+                }
+            </React.Fragment>,
             document.querySelector('#app')
         );
     </script>

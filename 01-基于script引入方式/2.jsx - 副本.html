@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基于浏览器&lt;script>引入方式 - JSX</title>
+    <link rel="stylesheet" href="./css/base.css">
+</head>
+
+<body>
+    <h1>基于浏览器&lt;script>引入方式 - JSX</h1>
+    <hr />
+
+    JSX = JavaScript + XML
+
+    <div id="app"></div>
+
+    <!-- react.js 核心库 开发版 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/16.13.1/umd/react.development.js"></script>
+
+    <!-- react-dom.js 用于和浏览器 dom 相关操作、渲染等 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/16.13.1/umd/react-dom.development.js"></script>
+
+    <!-- babel.js 用于语法转换，把一些特定的语法转换为标准的js语法，如：JSX、TS、ES6/7/8/9 to ES5等 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.js"></script>
+
+    <!-- type="text/babel" 指定浏览器 通过babel编译后 来执行 -->
+    <script type="text/babel">
+
+        ReactDOM.render(
+            <div>我是div
+                <h1 style={{ color: 'red', fontSize: '36px', 'text-align': 'right' }}>我是H1</h1>
+                <p>注：JSX最外层只能有一个标签包起来哦</p>
+            </div>,
+            document.querySelector('#app')
+        );
+    </script>
+</body>
+
+</html>

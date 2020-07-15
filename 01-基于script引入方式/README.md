@@ -41,7 +41,7 @@ React.js 框架本身包含两个部分
 
 ```js
 ReactDOM.render(
-    '<div>开课吧</div>',
+    '<div>abc123</div>',
     document.getElementById('app')
 );
 ```
@@ -128,7 +128,7 @@ SELECT * FROM `USER` WHERE `gender`='男' ORDER BY `age` DESC;
 
 ```jsx
 ReactDOM.render(
-    <div>开课吧</div>,
+    <div>abc123</div>,
     document.getElementById('app')
 );
 ```
@@ -161,7 +161,7 @@ virtual DOM，参考原生 DOM 对象构建的一个对象，它的结构足够�
 ```jsx
 const App = (
     <div>
-        <h1>开课吧</h1>
+        <h1>abc123</h1>
         <p>web前端高级工程师</p>
     </div>
 );
@@ -183,7 +183,7 @@ const App = (
 // 错误
 const App = (
 	<div>
-  	<h1>开课吧</h1>
+  	<h1>abc123</h1>
     <p>web前端高级工程师</p>
   </div>
   <div>第二个</div>
@@ -193,7 +193,7 @@ const App = (
 const App = (
 	<div>
     <div>
-      <h1>开课吧</h1>
+      <h1>abc123</h1>
       <p>web前端高级工程师</p>
     </div>
     <div>第二个</div>
@@ -213,7 +213,7 @@ const App = (
 - ……
 
 ```jsx
-let name = '开课吧';
+let name = 'abc123';
 let title = 'web前端高级工程师';
 const App = (
     <div>
@@ -261,7 +261,7 @@ const App = (
 - 当在属性中使用 <u>{}</u> 的时候，不要使用引号包含
 
 ```jsx
-let id = 'kaikeba';
+let id = 'abc123';
 
 // 错误
 const App = (
