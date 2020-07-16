@@ -4,6 +4,17 @@ import "./index.css";
 import logo from '../../logo.svg';
 
 export default class Home extends Component {
+    componentDidMount() {
+        // 监听订阅自定义事件
+        React.$emitter.addListener('mupiao', (msg) => {
+
+            // 发布触发自定义事件的内容是一个变量时
+            console.log(msg);
+
+            // 发布触发自定义事件的内容是一个函数时
+            msg(888)
+        })
+    }
     render() {
         return (
             <div className="home">
