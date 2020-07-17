@@ -1,6 +1,8 @@
 import React, { Component, PureComponent } from "react";
 
 export default class ClsComp extends React.Component {
+   
+
     constructor(props) {
 
         super(props); //如果当前子类重写父类，一定要调super(props)

@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Home></Home>
       <h1>事件绑定：</h1>
-      <EventBind data={{name:'沐枫', age: 28}} />
+      <EventBind />
       <h1>表单控件：</h1>
       <MyForm></MyForm>
       <h1>组件通信</h1>

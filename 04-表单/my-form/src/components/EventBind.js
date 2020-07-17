@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
 export default class EventBuild extends Component {
+    // 给当前组件的props设置默认值
+    static defaultProps = {
+        data: {
+             name: 'root',
+             age: 20
+        }
+       
+    }
     constructor(props) {
         super(props);
 
@@ -46,6 +54,7 @@ export default class EventBuild extends Component {
         // console.log('--------------', this.props, this.state);
         return (
             <div>
+                {this.props.data.name}
                 <button onClick={this.myFun1}>按扭事件{this.state.counter}</button>
                 <button onClick={this.myFun2.bind(this)}>事件对象 event</button>
                 <button onClick={(e) => { this.myFun3(e) }}>事件函数this指向</button>

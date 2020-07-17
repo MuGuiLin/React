@@ -3,18 +3,30 @@ import './index.css';
 
 
 /**
- * 表单
-在 React 里，HTML 表单元素的工作方式和其他的 DOM 元素有些不同。
+ 
+# React中的表单
+        在React 里，HTML 表单元素的工作方式和其他的 DOM 元素有些不同。
+    一般来说，表单以及表单中的控件（如：input、select……）是页面中与 JavaScript 打交道最多的元素了。
+    虽然我们可以通过 ref 的形式去操作它们，但是这样会比较麻烦，React.js 为我们提供了一个更好的方式把 React.js 中的数据以及逻辑与表单控件关联起来。
 
-一般来说，表单以及表单中的控件（如：input、select……）是页面中与 JavaScript 打交道最多的元素了。虽然我们可以通过 ref 的形式去操作它们，但是这样会比较麻烦，React.js 为我们提供了一个更好的方式把 React.js 中的数据以及逻辑与表单控件关联起来。
+
+# 受控组件 :
+    用 props 传入数据的话，组件可以被认为是受控（因为组件被父级传入的 props 控制）
 
 
-受控组件 : 用 props 传入数据的话，组件可以被认为是受控（因为组件被父级传入的 props 控制）
+# 非受控组件 : 
+    数据只保存在组件内部的 state 的话，是非受控组件（因为外部没办法直接控制 state）
 
-非受控组件 : 数据只保存在组件内部的 state 的话，是非受控组件（因为外部没办法直接控制 state）
+        广义来说，页面中的任意元素都是一个独立的组件，表单控件也是，它们内部也会维护属于自己的状态（如：value，selected，checked……），
+    当然这些状态是由原生实现的，而非 React.js 来控制的，但是有的时候我们希望通过 React.js 来管理和维护表单控件的状态，
+    我们把这种控件（控件）称为： 受控组件， 针对不同的组件，状态的维护方式也有所差异
+ 
 
-广义来说，页面中的任意元素都是一个独立的组件，表单控件也是，它们内部也会维护属于自己的状态（如：value，selected，checked……），当然这些状态是由原生实现的，而非 React.js 来控制的，但是有的时候我们希望通过 React.js 来管理和维护表单控件的状态，我们把这种控件（控件）称为： 受控组件， 针对不同的组件，状态的维护方式也有所差异
- */
+## 非受控组件默认值
+        有的时候，我们希望给一个非受控组件一个初始值，但是又不希望它后续通过React.js来绑定更新，
+    这个时候我们就可以通过 defaultValue 或者  defaultChecked  来设置非受控组件的默认值！
+
+*/
 class MyForm extends Component {
     constructor() {
         super(); //在访问“ this”或从派生构造函数返回之前，必须在派生类中调用超级构造函数;
@@ -130,7 +142,7 @@ class MyForm extends Component {
                 <div className="from-item">
                     {/* 单选 radio 需要注意的是，受控的属性不在是 value ，而是 checked */}
                     <label><input name="sex" type="radio" value="男" checked={this.state.radio === '男'} onChange={this.changeValue5} />男</label>
-                    <label><input name="sex" type="radio" value="女" checked={this.state.radio === '女'} onChange={this.changeValue5} />女</label>
+                    <label><input name="sex" type="radio" value="女" defaultChecked={this.state.radio}  onChange={this.changeValue5} />女</label>
                     <label><input name="sex" type="radio" value="保密" checked={this.state.radio === '保密'} onChange={this.changeValue5} />保密</label>
                     ：{this.state.radio}
                 </div>
