@@ -19,6 +19,8 @@ export default class List extends Component {
         return (
             <section className="list">
                 {this.state.lifeCycle}
+                <a target="_blank" href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">⽣命周期</a>
+
                 <img src={diagraml}/ >
             <ul>
                 <li>1</li>

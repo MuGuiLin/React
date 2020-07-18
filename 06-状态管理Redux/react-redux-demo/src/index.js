@@ -5,20 +5,25 @@ import App from './views/App';
 import './static/css/index.css';
 import * as serviceWorker from './serviceWorker';
 
+
+// 引入react-router-dom路由管理容器模块
+import { HashRouter, BrowserRouter } from 'react-router-dom';
+
+// 引入react-redux状态管理容器模块
 import { Provider } from 'react-redux';
 import store from './store';
-console.log('查看redux仓库初始数据：', store.getState())
+// console.log('查看redux仓库初始数据：', store.getState())
 
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-
-// 添加react-redux状态管理容器组件
 ReactDOM.render(
-    // 将仓库数据置入到 Provider容器组件 后，在各个组件中导入import {connect} from 'react-redux'，用 connect()(组件名) 导出，就可以在this.props中得到数据啦！！
+
+    // 全局配置状态管理容容器 将仓库数据置入到 Provider容器组件 后，在各个组件中导入import {connect} from 'react-redux'，用 connect()(组件名) 导出，就可以在this.props中得到数据啦！！
     <Provider store={store} >
-        {/* <BrowserRouter> */}
+
+        {/* 全局配置路由管理容器 */}
+        <HashRouter>
             <App />
-        {/* </BrowserRouter> */}
+        </HashRouter>
     </Provider>
     , document.getElementById('root')
 );

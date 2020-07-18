@@ -41,12 +41,14 @@
         */
 
         let app = document.querySelector('#app');
+        console.log('原生DOM')
         console.dir(app);
 
         let dom = <div id="box" className="dom" >我是div
                     <h1 style={{color: 'red', textAlign: 'left', 'font-size': '24px'}}>JSX我是H1</h1>
                 </div>;
         //虚拟DOM:
+        console.log('VDOM')
         console.dir(dom);
 
         ReactDOM.render(

@@ -1,0 +1,14 @@
+.redux {
+    text-align: left;
+}
+.redux h1{
+    font-size: 24px;
+}
+.redux pre, p {
+    font-size: 18px;
+    line-height: 36px;
+}
+
+.redux b{
+    color: red;
+}
