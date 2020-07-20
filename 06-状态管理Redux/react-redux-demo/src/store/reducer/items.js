@@ -1,13 +1,22 @@
-const users = [
+const items = [
     {
-        id: '001',
+        id: 1,
         name: '沐枫',
-        age: 28
+        rmb: 28
     }
 ];
 
-export default ( state = users, action) => {
-    switch(action.type) {
+export default (state = items, action) => {
+
+    switch (action.type) {
+        case 'ADD-ITEMS':
+            // 自动添加 id 和 rmb
+            let redom = {
+                id: state.length + 1,
+                name: '',
+                rmb: (Math.random() * 100).toFixed(2)
+            }
+            return [ ...state, {...redom, ...action.data}]
 
         default:
             return state;

@@ -1,103 +1,31 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 
-// 引入react-redux模块，就不用导入store仓库了，因为在入口文件index.js的Provider组中已经导入，所以直接导入import {connect} from 'react-redux';
 import { connect } from 'react-redux';
 
 export default connect((state) => {
-    // 注：这里的state 就是store仓库中的state，所以从这里返回的数据在应该组件被调用时，会解构赋值给props，然后在上面的this.props中就可以拿到对应的数据啦！！！
-    console.debug('connect() -> state', state);
-
-    // return state;  // 将store仓库中所有的数据都返回给props
-
-    return {
-        users: state.users // 只返回users数据返回给props
-    }
-}
-    // 注：如在这里自定义了更新方法，那么 this.props.dispatch 将会被覆盖掉
-    , {
-        addUser: (data) => {
-            return data;
-        },
-
-        upUser(data) {
-            return data;
-        }
-    }
-
-)(class ReactRedux extends PureComponent {
+    return state;  // 将store仓库中所有的数据都返回给props
+})(class ReactRedux extends PComponent {
     constructor() {
         super();
-
-        this.state = {
-            // users: this.props.users
-            nName: '',
-            nAge: '',
-            nJob: ''
-        }
-
     }
 
     componentDidMount() {
         // 注：react-redux 在更新store中的数据后会自动更新render()，所以不用监听 或 强制重新渲染当前组件啦！
         // 强制重新渲染当前组件，执行render()方法 state和props数据更新，就会重新render，但是当层级过深时，可能就不会触发渲染，这时候就要用到this.forceUpdate()
-        this.forceUpdate();
+        // this.forceUpdate();
 
-    }
-
-    getStore = () => {
-        console.log(this.props.users)
-    }
-
-    onChangeName = (e) => {
-        this.setState({
-            // user: { ...user, ...{ name: e.target.value } }
-            nName: e.target.value
-        });
-    }
-
-    onChangeAge = (e) => {
-        this.setState({
-            nAge: e.target.value
-        });
-    }
-
-    onChangeJob = (e) => {
-        this.setState({
-            nJob: e.target.value
-        });
-    }
-
-    upState = () => {
         // 更新store中的数据
-        // this.props.dispatch({
-        //     type: 'UP-USERS',
-        //     data: {
-        //         name: this.state.nName,
-        //         age: this.state.nAge,
-        //         job: this.state.nJob
-        //     }
-        // });
-
-        this.props.upUser({
-            type: 'UP-USERS',
+        this.props.dispatch({
+            type: 'xxx',
             data: {
-                name: this.state.nName,
-                age: this.state.nAge,
-                job: this.state.nJob
+                xxx: xxx
             }
         });
-
-        // this.props.addser({
-        //     type: 'ADD-ITEMS',
-        //     data: { name: this.state.nName }
-        // })
-
-
     }
 
     render() {
         // 在connect()方法设置指定想要的数据，所以直接在props获取store中的数据就OK啦！
-        const { name, age, job } = this.props.users
+        const { xxx, xxx, xxx } = this.props.xxx
 
         return (
             <section className="redux">

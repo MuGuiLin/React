@@ -9,7 +9,12 @@ export default (state = users, action) => {
     // console.debug('*********action中是将修改的对象，和要修改的新值', action);
 
     switch (action.type) {
-        case 'UPDATE':
+
+        case 'ADD-USERS':
+            // 修改数据：key相等就覆盖数据，其他保持不变！
+            // return { ...state, ...action.data }
+
+        case 'UP-USERS':
             // 修改数据：key相等就覆盖数据，其他保持不变！
             return {...state, ...action.data}
 

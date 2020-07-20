@@ -1,8 +1,6 @@
 import React from 'react';
 
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 
 export default class Item extends React.Component {
     constructor(props) {
@@ -10,7 +8,7 @@ export default class Item extends React.Component {
     };
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         let { text } = this.props;
         let icon = ['🍆', '🌷', '🍒', '🍎', '🌻', '🍇', '🌽', '🍀', '🌼', '🍓', '🌲', '🍏', '🍄', '🍅', '🍐', '🍹']
         return (

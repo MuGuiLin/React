@@ -20,6 +20,10 @@ import { createStore, combineReducers } from 'redux';
     react-redux：
         redux和react并没直接关系，redux是一个独立的js状态管理库，但如果要在react中使用redux还需要另外再安装react-redux
         npm i -S redux react-redux
+
+    redux在修改更新状态(数据)时，整体全部修改，所以在修改数据时根据你传入的action.type 和 action.data  用对象解构合并的方式{...obj1, ...obj2} 来修改store中的数据。
+	当key相等就覆盖数据，其他不相等的就保持不变！
+
 */
 
 // const initDate = {
@@ -55,11 +59,11 @@ import { createStore, combineReducers } from 'redux';
 //             break;
 //     };
 
-// }, initDate);
+// }, initDate); // initDate是第一次向仓库中提交的初始值
 
 
 
-//当状态数据太多时，可将其分片管理（析分为多个模块，然后在集中管理），用combineReducers方法来构建状态管理仓库！
+//当状态数据太多时，可将其分片管理（拆分为多个模块，然后在集中管理），用combineReducers方法来构建状态管理仓库！
 
 import users from './reducer/users';
 import items from './reducer/items';

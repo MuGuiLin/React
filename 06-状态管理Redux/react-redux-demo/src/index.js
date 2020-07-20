@@ -17,7 +17,7 @@ import store from './store';
 
 ReactDOM.render(
 
-    // 全局配置状态管理容容器 将仓库数据置入到 Provider容器组件 后，在各个组件中导入import {connect} from 'react-redux'，用 connect()(组件名) 导出，就可以在this.props中得到数据啦！！
+    // 全局配置状态管理容器 将仓库数据置入到 Provider容器组件 后，在各个组件中导入import {connect} from 'react-redux'，用 connect()(组件名) 导出，就可以在this.props中得到数据啦！！
     <Provider store={store} >
 
         {/* 全局配置路由管理容器 */}
