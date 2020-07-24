@@ -1,0 +1,27 @@
+.header {
+    padding-left: 100px;
+    height: 60px;
+    border-bottom: 2px solid #0092db;
+    background: rebeccapurple;
+    text-align: left;
+    nav {
+        a {
+            display: inline-block;
+            padding: 0px 40px;
+            line-height: 60px;
+            display: inline-block;
+            font-size: 18px;
+            color: white;
+
+            i {
+                vertical-align: text-top;
+            }
+        }
+
+        .active {
+            background: white;
+            color: #00bd00;
+            font-weight: bold;
+        }
+    }
+}

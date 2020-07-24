@@ -1,0 +1,76 @@
+.dishinfo {
+    margin: auto;
+    width: 1280px;
+    .back-btn {
+        display: block;
+        margin: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        margin-right: 20px;
+        background: #00bd00;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .banner {
+        margin: auto;
+        position: relative;
+
+            img {
+                padding: 10px;
+                border: 1px solid green;
+                width: 60%;
+                min-width: 800px;
+                max-height: 500px;
+                box-shadow: 0 0 10px 0px gray;
+            }
+        
+    }
+
+    .detail {
+        margin-top: 50px;
+        text-align: left;
+        .jumbotron {
+            padding: 30px;
+            h1 {
+                color: #00bd00;
+                letter-spacing: 12px;
+                font-size: 38px;
+            }
+            h4 {
+                font-size: 24px;
+                color: #ff0076;
+                line-height: 50px;
+                span {
+                    padding-left: 30px;
+                    font-size: 18px;
+                    color: gray;
+                }
+            }
+            ul {
+                padding: 20px;
+                li {
+                    color: #666;
+                    font-size: 18px;
+                    line-height: 38px;
+                }
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 18px;
+                margin-right: 20px;
+                background: #00bd00;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            .red{
+                background: rebeccapurple;
+            }
+        }
+        .panel-body {
+            line-height: 40px;
+            font-size: 18px;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.dishlist {
+    margin: auto;
+    width: 1280px;
+    dl {
+        text-align: left;
+        dt {
+            h4 {
+                color: #555;
+                line-height: 40px;
+                font-size: 20px;
+                font-weight: bold;
+                border-bottom: 1px solid #563d7c;
+            }
+        }
+        dd {
+            margin: 20px;
+            padding: 10px;
+            display: inline-block;
+            border: 1px solid rgb(224, 224, 224);
+            border-radius: 3px;
+            box-shadow: 0 0 8px 0 rgb(209, 209, 209);
+            cursor: pointer;
+            img {
+                width: 200px;
+                height: 160px;
+            }
+            p{
+                font-weight: bold;
+                color: #09b509;
+                line-height: 40px;
+            }
+            h3{
+               font-weight: 500;
+            }
+        }
+        dd:hover {
+            border: 1px solid rgb(0, 194, 0);
+            box-shadow: 0 0 8px 0 rgb(209, 209, 209);
+        }
+    }
+}
