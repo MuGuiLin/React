@@ -1,8 +1,8 @@
 # React介绍
 
-![img](https://raw.githubusercontent.com/MuGuiLin/React.js/master/logo.jpg)
+**[React 中文文档](https://zh-hans.reactjs.org/)**
 
-一个用于构建用户界面的 <u>JavaScript</u> 库
+**一个用于构建用户界面的 <u>JavaScript</u> 库**
 
 
 
@@ -23,7 +23,10 @@
 - React使用JSX来描述UI
 - babel-loader把JSX 编译成相应的 JS 对象，React.createElement再把这个JS对象构造成React需要的虚拟dom。
 
-## JSX
+
+
+## JSX语法
+
 JSX是⼀种JavaScript的语法扩展，其格式比较像模版语言，但事实上完全是在JavaScript内部实现的。
 JSX可以很好地描述UI，能够有效提高开发效率，
 px
@@ -33,9 +36,11 @@ px
 ## React 全家桶
 
 - `React` : 提供框架（库）核心功能，如 `组件`、`虚拟DOM` 等
-- `create-react-app` : 脚手架，提供一套用于快速 构建和打包 `React` 项目的工具
+
+- `React-DOM` : 可在应用顶层使用的 DOM（DOM-specific）方法
+
 - `react-router` : 基于 `React` 的路由库
+
 - `redux、react-redux` : 状态管理库
 
-- npx create-react-app my-app  // 创建项目
-- npm run eject  // 暴露配置项
+    

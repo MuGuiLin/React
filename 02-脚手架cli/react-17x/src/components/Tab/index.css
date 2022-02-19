@@ -1,0 +1,44 @@
+.tab {
+    position     : relative;
+    margin       : 30px auto;
+    width        : 375px;
+    height       : 720px;
+    border       : 1px solid gray;
+    border-radius: 20px;
+    overflow     : hidden;
+    
+}
+
+
+.tab header h2 {
+    margin       : 0;
+    line-height  : 50px;
+    color        : blueviolet;
+    border-bottom: 1px solid cadetblue;
+}
+
+.tab .nav {
+    margin    : 0;
+    padding   : 0;
+    list-style: none;
+    position  : absolute;
+    bottom    : 0;
+    left      : 0;
+    display   : flex;
+    width     : 100%;
+    border-top: 1px solid cadetblue;
+    background-color: white;
+}
+
+.tab .nav li {
+    flex       : 1;
+    text-align : center;
+    line-height: 50px;
+    cursor     : pointer;
+}
+
+.tab .nav li.active {
+    background-color: blueviolet;
+    font-weight     : bold;
+    color           : white;
+}

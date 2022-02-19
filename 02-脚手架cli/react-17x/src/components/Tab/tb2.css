@@ -1,0 +1,17 @@
+.tb2 {}
+
+.tb2 .wrapper {
+    margin  : 20px auto;
+    width   : 92%;
+    height  : 360px;
+    cursor  : pointer;
+    overflow: hidden;
+    border  : 1px solid gray;
+}
+.tb2 .wrapper ul{
+    
+}
+.tb2 .wrapper li {
+    line-height: 28px;
+    text-align : left;
+}

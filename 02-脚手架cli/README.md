@@ -1,34 +1,6 @@
 # React Cli 的使用：
 
-
-#### 一、安装React Cli脚手架(如果已安装React Cli脚手架 此步略过)
-
-	npm install -g create-react-app  //全局全装creact脚手架工具
-
-
-	
-#### 二、创建项目
-
-	create-react-app 项目名 （此时会在当前目录创建一个以上面的项目名为文件夹名的项目文件夹（里面包含相应的项目目录、模块、配置文件等））
-
-	
-
-#### 三、运行、打包【注：以下命令要在项目根目录执行】
-
-	1、cd 项目名：
-	      进入项目根目录
-	
-	2、运行（启动）：
-		npm start //运行项目，自动打开浏览器
-		
-	3、打包（构建）：
-		npm run build   //打包
-		
-		
-#### 四、其他命令
-	npm run eject  //显示webpack相关文件
-
-
+## [[Create React App 中文文档](https://www.html.cn/create-react-app/)](https://www.html.cn/create-react-app/docs/getting-started/)
 
 # Create-react-app 介绍
 
@@ -42,79 +14,87 @@
 
 
 
-### 安装与使用
+#### 一、[创建新的 React 应用](https://react.docschina.org/docs/create-a-new-react-app.html)
 
-通过 <u>npm</u>、<u>yarn</u>、<u>npx</u> 都可以
+> 注：在创建React 应用之前，你需要在你的机器上安装NodeJs环境： [Node >= 8.10 和 npm >= 5.6](https://nodejs.org/en/)
 
-#### 安装
+**全局安装React Cli脚手架（不推荐，因为一旦全局安装后，当官方发布新版本时，想用新版又要得重装）**
 
-###### npm
-
-```bash
-npm i -g create-react-app
+```sh
+1、全局安装React Cli脚手架：
+	npm install -g create-react-app
+	或
+	yarn global add create-react-app
+	
+2、创建项目：	
+	create-react-app 项目名 如：my-app 【此时会在当前目录创建一个以上面的项目名为文件夹名的项目文件夹（里面包含相应的资源目录、模块、配置文件等）】
+	
+3、cd 项目名：
+	cd my-app	// 进入项目根目录
+	
+4、运行（启动）：
+	npm start	// 运行启动项目 会启动一个内置的本地 <u>WebServer</u>，根目录映射到 './public' 目录，默认端口：3000
 ```
 
-###### yarn
 
-```bash
-yarn global add create-react-app
+
+**局部临时React Cli脚手架（推荐，因为次装安都是最新的）**[官方文档](https://react.docschina.org/tutorial/tutorial.html#setup-option-2-local-development-environment)
+
+```sh
+1、创建项目：
+	npx create-react-app my-app // my-app可自定义
+	
+2、cd 项目名：
+	cd my-app	// 进入项目根目录
+	
+2、运行（启动）：
+	npm start	// 运行启动项目
 ```
 
-#### 使用
 
-安装完成以后，即可使用 <u>create-react-app</u> 命令
 
-```bash
-create-react-app <项目名称>
+
+#### 二、运行、打包【注：以下命令要在项目根目录执行】
+
+```sh
+1、cd 项目名：
+      进入项目根目录
+	
+2、打包（构建）：
+	npm run build   //打包发布 【注 npm run build 命令一定要在和src同级目录中才能正常运行！！】
 ```
 
-或者通过 <u>npx</u> 的方式
 
-###### npx
+​		
+#### 三、其他命令
+```sh
+npm run test	// 启动测试运行器。
 
-```bash
-npx create-react-app <项目名称>
+npm run eject   // 暴露配置项 显示webpack相关文件（注：该命令一旦执行后，不可逆！！）
 ```
 
-### 项目目录结构说明
+
+
+#### 四、项目结构
 
 运行命令以后，就会在运行命令所在目录下面创建一个以项目名称为名的目录
 
-```
+```bash
 my-app/
-  README.md
-  node_modules/
-  package.json
-  public/
-    index.html
-    favicon.ico
-  src/
-    App.css
-    App.js
-    App.test.js
-    index.css
-    index.js
-    logo.svg
+    node_modules/	// 依赖包
+	public/			// 静态公共目录
+		index.html	
+    	favicon.ico
+    src/			// 项目工程源代码目录
+    	App.css
+    	App.js
+    	App.test.js
+    	index.css
+    	index.js
+    	logo.svg
+    package.json	// 依赖包版本管理
+	README.md		// 使用方法文档
 ```
-
-### 命令脚本
-
-<u>create-react-app</u> 同时也提供了其它一些命令来帮助我们进行开发
-
-###### npm  start
-
-启动一个内置的本地 <u>WebServer</u>，根目录映射到 './public' 目录，默认端口：3000
-
-###### npm test
-
-运行 <u>Jest</u> 测试
-
-###### npm run build
-
-打包应用（准备上线）
-
-
-
 
 
 
