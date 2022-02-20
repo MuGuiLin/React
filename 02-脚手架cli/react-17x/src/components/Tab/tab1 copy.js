@@ -23,11 +23,10 @@ class Tab1 extends Component {
 
         // 注：当状态被改变时，会执行render()重新渲染DOM
         this.state = {
-            keywords: '',
             list: []
         };
 
-        // this.keywords = React.createRef();
+        this.keywords = React.createRef();
     };
 
     /*
@@ -61,8 +60,7 @@ class Tab1 extends Component {
 
         // 模糊搜索
         // const newArr = arr.filter(o => o.includes('a')); // 例：返回数组中所有带a的 新数组
-        // const newArr = arr.filter(o => o.toUpperCase().includes(this.keywords.current.value.toUpperCase()));
-        const newArr = arr.filter(o => o.toUpperCase().includes(this.state.keywords.toUpperCase()));
+        const newArr = arr.filter(o => o.toUpperCase().includes(this.keywords.current.value.toUpperCase()));
 
         this.setState({
             list: newArr
@@ -70,20 +68,11 @@ class Tab1 extends Component {
     }
 
     render() {
-        // console.log(11111, this.props) ;
+        console.log(11111, this.props) ;
         return (
             <div>
                 <h3 style={{ 'backgroundColor': 'red' }}>模糊搜索</h3>
-
-                {/* 非受控单表 */}
-                {/* <input type="search" ref={this.keywords} placeholder="模糊搜索!" /> */}
-
-                {/* 受控单表 */}
-                <input type="search" value={this.state.keywords} onChange={(evt) => {
-                    this.setState({
-                        keywords: evt.target.value
-                    })
-                }} placeholder="模糊搜索!" />
+                <input type="search" ref={this.keywords} placeholder="模糊搜索!" />
                 <button onClick={() => this.search()} >搜索</button>
 
                 {this.state.list.length && this.state.list.map((o, i) => {

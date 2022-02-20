@@ -1,0 +1,52 @@
+.box h2 {
+    text-align: center;
+    color     : purple;
+}
+
+.box h3 {
+    color: blue;
+}
+
+.box .main {
+    display: flex;
+    margin : 10px;
+}
+
+.box .main .list {
+    flex        : 160px;
+    margin-right: 20px;
+    height      : 500px;
+    border-right: 1px solid #ddd;
+    overflow-y  : auto;
+}
+
+.box .main .list .item {
+    margin : 10px auto;
+    padding: 8px 0;
+    width  : 110px;
+    border : 1px solid #ddd;
+    cursor : pointer;
+}
+
+.box .main .list .item h5 {
+    margin: 0;
+}
+
+.box .main .info {
+    flex            : 250 1;
+    background-color: #EEE;
+}
+
+.box .main .info article {
+    padding    : 10px;
+    text-align : left;
+    line-height: 36px;
+}
+
+.box .main .info article p {
+    color: goldenrod;
+}
+
+.box .main .info article section {
+    text-indent: 32px;
+}

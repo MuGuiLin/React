@@ -4,22 +4,19 @@ import './index.css'
 
 export default class index extends PureComponent {
   state = {
-    myName: '',
     list: [],
     keep: []
   }
 
-  // myName = React.createRef();
+  myName = React.createRef();
 
   add() {
     // console.log(this.myName.current.value);
 
     const obj = {
       id: Date.now(),
-      // name: this.myName.current.value,
-      name: this.state.myName,
-      show: true,
-      check: false,
+      name: this.myName.current.value,
+      show: true
     };
 
     // 注：不要直接修改状态！！因为可能会造成不可预期的问题！
@@ -34,11 +31,10 @@ export default class index extends PureComponent {
 
     this.setState({
       list: newList,
-      myName: ''
     });
 
     // 清空输入框
-    // this.myName.current.value = '';
+    this.myName.current.value = '';
 
     console.log(this.state.list);
   }
@@ -87,14 +83,6 @@ export default class index extends PureComponent {
 
   }
 
-  checked(i) {
-    let newKeep = [...this.state.keep]; // 深复制(返回一个新数组)
-    newKeep[i].check = !newKeep[i].check;
-    this.setState({
-      keep: newKeep,
-    })
-  }
-
   /*
   注：React并不会在真正的绑定事件到每一个具体的标签元素上，而是采用事件代理(向上冒泡到在根组件document.getElementById('root')上) 的模式
 
@@ -109,22 +97,11 @@ export default class index extends PureComponent {
       <div className='to-do-list'>
         <h1>ToDoList</h1>
         <label>
-
-          {/* 非受控单表 */}
           {/* <input type="text" ref={this.myName} /> */}
-          {/* <textarea ref={this.myName} placeholder="支持输入富文本(html标签)" ></textarea> */}
-
-          {/* 受控单表 */}
-          <textarea value={this.state.myName} onChange={(evt) => {
-            this.setState({
-              myName: evt.target.value
-            })
-          }} placeholder="支持输入富文本(html标签)" rows="1" cols="56" style={{ verticalAlign: 'bottom' }}  ></textarea>
-
+          <textarea ref={this.myName} placeholder="支持输入富文本(html标签)" ></textarea>
           <button onClick={() => this.add()}>添加</button>
           <button onClick={this.add2}>添加</button>
           <button onClick={this.add.bind(this)}>添加</button>
-
           {/* <button onClick={this.add.call(this)}>添加</button>
           <button onClick={this.add.apply(this)}>添加</button> */}
         </label>
@@ -140,7 +117,7 @@ export default class index extends PureComponent {
                     <span dangerouslySetInnerHTML={{ __html: o.name }}></span>
 
                     {/* 事件与传参 */}
-                    {/* <button onClick={this.del.bind(this, i)}>删除</button> */}
+                    <button onClick={this.del.bind(this, i)}>删除</button>
                     <button onClick={() => this.del(i)}>删除</button>
 
                     {/* 条件渲染 */}
@@ -160,15 +137,7 @@ export default class index extends PureComponent {
             {
               keep.length > 0 && keep.map((o, i) => {
                 return (
-                  <li key={o.id}>
-                    {/* 受控单表 */}
-                    <input id={o.id} type="checkbox" checked={o.check} onChange={() => this.checked(i)} />
-                    <label htmlFor={o.id} style={{ textDecoration: o.check ? 'line-through' : '' }}>已阅：{o.name}</label>
-
-                    {/* checkbox单表默认值 */}
-                    <input id={'radio'+ o.id} type="radio" name="radio" defaultChecked={true}  />
-                    <label htmlFor={'radio'+ o.id} style={{ backgroundColor: o.check ? 'red' : '' }}>单选：{o.name}</label>
-
+                  <li key={o.id}>{o.name}
                     <button onClick={() => this.keep(i)}>取消收藏 </button>
                   </li>
                 )

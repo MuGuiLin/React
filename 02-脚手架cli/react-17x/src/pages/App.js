@@ -1,8 +1,11 @@
 import logo from '../assets/logo.svg';
 import './App.css';
 
-import Todolist from '../components/Todolist'
-import Tab from '../components/Tab'
+import Todolist from '../components/Todolist';
+import Tab from '../components/Tab';
+import Communication from '../components/Communication';
+
+
 function App() {
   return (
     <section className="App">
@@ -23,6 +26,7 @@ function App() {
       <main>
         <Todolist></Todolist>
         <Tab></Tab>
+        <Communication></Communication>
       </main>
     </section>
   );

@@ -1,0 +1,66 @@
+.Communication {
+    position     : relative;
+    margin       : 20px auto;
+    padding      : 30px;
+    width        : 680px;
+    min-height   : 500px;
+    border       : 1px solid gray;
+    border-radius: 10px;
+    overflow     : hidden;
+}
+
+.Communication h1 {
+    margin: 0;
+}
+
+.list-box {
+    display: flex;
+
+}
+
+.list-box ul {
+    margin       : 10px;
+    padding      : 30px;
+    flex         : 1;
+    min-height   : 200px;
+    border       : 1px solid gray;
+    border-radius: 10px;
+}
+
+.list-box ul li {
+    line-height: 32px;
+}
+
+.list-box ul li button {
+    margin: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.Communication .nav {
+    margin          : 0;
+    padding         : 0;
+    list-style      : none;
+    position        : absolute;
+    bottom          : 0;
+    left            : 0;
+    display         : flex;
+    width           : 100%;
+    border-top      : 1px solid cadetblue;
+    background-color: white;
+}
+
+.Communication .nav li {
+    flex       : 1;
+    text-align : center;
+    line-height: 50px;
+    cursor     : pointer;
+}
+
+.Communication .nav li.active {
+    background-color: blue;
+    font-weight     : bold;
+    color           : white;
+}
