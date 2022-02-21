@@ -20,7 +20,8 @@ class LifeCycle extends Component {
     /**
      * 类式组件->生命周期，函数式组件->hook(钩子、副作用函数)
     */
-    // 组件初始化阶段（3个）
+
+    //----------------------【组件初始化阶段（3个函数）】----------------------
 
     // 注：在16.2以后就不建议使用该生命周期了，如果一定要用的的话，需要在前面加上 UNSAFE_ 表示不安全的！！ 
     // componentWillMount() {
@@ -45,7 +46,7 @@ class LifeCycle extends Component {
         });
     }
 
-    // 组件运行中阶段
+    //----------------------【组件运行中阶段（4个函数）】----------------------
     // cwrp
     componentWillReceiveProps(nextProps) {
         // 当父组件更新属性(props)触发
@@ -78,7 +79,7 @@ class LifeCycle extends Component {
         console.debug('3、完成更新后的状态挂载到真实DOM中'); // 状态每更新1次，执行1次，当DOM被更新(修改)时触发，可以获取、修改更新后的DOM
     }
 
-    //组件销毁阶段
+    //----------------------【组件销毁阶段（1个函数）】----------------------
     // cwu
     componentWillUnmount() {
         console.debug('组件即将被销毁！'); // 只执行1次，在删除销毁之前触发，可用于一些清理类操作，如清除定时器、事件监所器等。
