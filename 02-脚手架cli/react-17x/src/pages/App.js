@@ -4,7 +4,7 @@ import './App.css';
 import Todolist from '../components/Todolist';
 import Tab from '../components/Tab';
 import Communication from '../components/Communication';
-
+import LifeCycle from '../components/LifeCycle';
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
         <Todolist></Todolist>
         <Tab></Tab>
         <Communication></Communication>
+        <LifeCycle></LifeCycle>
       </main>
     </section>
   );
