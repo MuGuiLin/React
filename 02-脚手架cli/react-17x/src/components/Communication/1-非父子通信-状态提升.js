@@ -45,10 +45,12 @@ export default class Promote extends Component {
 
   getData() {
     fetch('/data.json').then(res => res.json()).then((res) => {
-      this.setState({
-        list: res.data.films,
-        info: res.data.films[0]
-      });
+      if (res.data.films.length) {
+        this.setState({
+          list: res.data.films,
+          info: res.data.films[0]
+        });
+      }
     }).catch((err) => {
       console.log(err);
     });
@@ -57,7 +59,12 @@ export default class Promote extends Component {
   setInfo(info) {
     this.setState({
       info
-    })
+    });
+  }
+
+  //组件销毁阶段
+  componentWillUnmount() {
+    console.debug('组件即将被销毁！'); // 只执行1次，在删除销毁之前触发，可用于一些清理类操作，如清除定时器、事件监所器等。
   }
 
   render() {

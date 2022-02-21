@@ -1,0 +1,30 @@
+.life-cycle {
+    margin: 50px auto;
+    width : 800px;
+    height: auto;
+    border: 1px outset gray;
+}
+
+.scu {
+    display  : flex;
+    flex-flow: wrap;
+    margin   : 20px auto;
+    width    : 744px;
+    height   : auto;
+    border   : 1px outset gray;
+}
+
+.scu .box {
+
+    margin     : 5px;
+    width      : 50px;
+    height     : 50px;
+    line-height: 50px;
+    color      : red;
+    text-align : center;
+    border     : 1px outset gray;
+}
+
+.scu .box:last-child {
+    clear: both
+}
