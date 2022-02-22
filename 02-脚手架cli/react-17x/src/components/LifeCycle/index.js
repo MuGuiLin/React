@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './style.css'
+import './style.css';
 
-import Scu from './scu性能优化生命周期函数'
+import Scu from './scu性能优化生命周期函数';
 
 class LifeCycle extends Component {
 
