@@ -5,7 +5,7 @@ import sub from './stp';
 
 console.log(sub);
 /**
- * 通过发布订阅模式来实现通信，不就受限于组件之的层级关系！！
+ * 通过发布订阅模式来实现组件跨层级通信，这样不就受限于组件之的层级关系了！！
  */
 
 // 左侧点击项 受控组件
@@ -48,13 +48,6 @@ const Info = () => {
 }
 
 
-/**
- * 非父子通信-状态提升（中间者模式）
- * 
- * 原理：当两个非父子组件之间要进行通信时，可通过一个中间组件来进行转发即可！！
- */
-
-
 export default class SubscribeToPublish extends Component {
   constructor() {
     super();
@@ -83,7 +76,7 @@ export default class SubscribeToPublish extends Component {
     const { list } = this.state;
     return (
       <div className='box'>
-        <h3>2-非父子通信-订阅发布模式</h3>
+        <h3>2-非父子(跨级)通信-订阅发布模式</h3>
         <hr />
         <main className='main'>
           <div className='list'>

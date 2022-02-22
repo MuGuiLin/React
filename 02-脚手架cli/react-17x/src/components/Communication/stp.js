@@ -18,10 +18,17 @@ class Stp {
 
     // 发布方法
     publish(msg) {
+        // 全局发布
         this.events.forEach(callback => {
             // 遍历执行回调
             callback && callback(msg);
         });
+
+        // // 根据type条件定向发布
+        // this.events.forEach(({ type, callback }) => {
+        //     // 遍历执行回调
+        //     (msg.type === type) && callback(msg);
+        // });
     };
 }
 

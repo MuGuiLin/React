@@ -27,7 +27,7 @@ const Info = (props) => {
 }
 
 /**
- * 非父子通信-状态提升（中间者模式）
+ * 非父子(跨级)通信-状态提升（中间者模式）
  * 
  * 原理：当两个非父子组件之间要进行通信时，可通过一个中间组件来进行转发即可！！
  */
@@ -71,7 +71,7 @@ export default class Promote extends Component {
     const { list, info } = this.state;
     return (
       <div className='box'>
-        <h3>1-非父子通信-状态提升（中间者模式）</h3>
+        <h3>1-非父子(跨级)通信-状态提升（中间者模式）</h3>
         <hr />
         <main className='main'>
           <div className='list'>

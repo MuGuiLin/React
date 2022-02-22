@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import Child1 from './1-非父子通信-状态提升'
-import Child2 from './2-非父子通信-订阅发布模式'
-import Child3 from './3-非父子通信-context方案'
+import Child1 from './1-非父子(跨级)通信-状态提升';
+import Child2 from './2-非父子(跨级)通信-订阅发布模式';
+import Child3 from './3-非父子(跨级)通信-context方案';
+import Child4 from './React插槽';
 
-import './index.css'
+import './index.css';
 
 export default class Communication extends Component {
     state = {
@@ -19,6 +20,9 @@ export default class Communication extends Component {
             }, {
                 id: 3,
                 name: 'context方案'
+            }, {
+                id: 4,
+                name: 'React插槽'
             }
         ],
     }
@@ -28,8 +32,8 @@ export default class Communication extends Component {
                 return <Child2 />;
             case 2:
                 return <Child3 />;
-            // case 3:
-            // return <Child1 />;
+            case 3:
+                return <Child4 />;
             default:
                 return <Child1 />;
             // break;
