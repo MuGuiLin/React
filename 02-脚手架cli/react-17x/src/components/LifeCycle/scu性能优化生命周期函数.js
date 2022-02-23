@@ -5,7 +5,9 @@ class Box extends Component {
 
     /**
      * scu -> shouldComponentUpdate()性能提升、优化生命周期函数，这也是面试React中经常被问到的一个点。
-     *      如果没使用这个方法来阻止一下的话，状态每更新1次，render()被执行的次数，就是父组件中this.state.list.map的次数，即108次
+     *      如果没使用这个方法来阻止一下的话，当父组件状态每更新1次，render()被执行的次数，就是父组件中this.state.list.map的次数，即108次，
+     *      即便是当父组件更新的属性不是传给子组件的props中的属性 或者是 父组件根本就没向子组件传任何属性，但子组件还是会被重新渲染一次，
+     *      所以shouldComponentUpdate()一般用在子组件中使用
      * @param {*} nextProps 
      * @returns 
      */

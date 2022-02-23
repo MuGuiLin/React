@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 import Scu from './scu性能优化生命周期函数';
+import Cwrp from './cwrp Props更新时的生命周期函数';
 
 class LifeCycle extends Component {
 
@@ -49,12 +50,13 @@ class LifeCycle extends Component {
     //----------------------【组件运行中阶段（4个函数）】----------------------
     // cwrp
     componentWillReceiveProps(nextProps) {
-        // 当父组件更新属性(props)触发
+        // 当父组件更新属性时触发，此时子组件中的props也会更新，这里也是最先获取父组件传的属性，可在这里做：用nextProps 来新更this.state中的属性等操作
+        console.log('该生命周期方法主要用于在[子组件]中，当父组件更新属性时，重渲染执行render()'); // 父组件状态每更新1次，执行1次
     }
 
     // scu 性能优化生命周期函数
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('应该生命周期方法主要用于防止不必要的更新操作，因为每次更新都要执行diff算法、render()等开销'); // 状态每更新1次，执行1次
+        console.log('该生命周期方法主要用于在[子组件]中防止不必要的更新操作，因为每次更新都要执行diff算法、render()等开销'); // 父组件状态每更新1次，执行1次
         // if(老状态this.state !== 新状态nextState) {
         if (JSON.stringify(this.state) !== JSON.stringify(nextState)) {
             return true; // 相当于 koa 和 vue 中的 next()方法一样向下继续执行
@@ -111,6 +113,9 @@ class LifeCycle extends Component {
 
                 <br />
                 <Scu></Scu>
+
+                <br />
+                <Cwrp></Cwrp>
             </div>
         );
     }

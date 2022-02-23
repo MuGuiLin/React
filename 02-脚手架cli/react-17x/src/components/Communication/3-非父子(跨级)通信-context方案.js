@@ -10,16 +10,17 @@ const MyContext = React.createContext();  // 创建context对象
 
 // 左侧点击项 受控组件
 class Item extends Component {
-  shouldComponentUpdate(nextProps, nextState) { 
-    // console.log('this.props', this.props, nextProps)
-    if(this.props.filmId !== nextProps.filmId) {
+
+  // houldComponentUpdate()性能提升、优化生命周期函数
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.filmId !== nextProps.filmId) {
       return true;
     }
-    return false;
-   }
+    return false;   // 注 这里通过shouldComponentUpdate() 能有效阻止下面的 render()执行了，担阻止不了Consumer中的回调函数(value) => {}
+  }
 
   render() {
-    console.log('render');
+    console.error('render被执行了！！');
     const { poster, name } = this.props;
     return (
       // Consumer 销费者
