@@ -68,6 +68,86 @@ const Child3 = (props) => {
 }
 
 
+class Child4 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            type: 1,
+            list: []
+        }
+    };
+
+    getData(type) {
+
+        // fetch('http://m.smgradio.cn/api/api.php?action=index&pageindex=2&pagenum=5').then(res => res.json()).then(res => {
+        fetch(`https://m.maizuo.com/gateway?cityId=310100&pageNum=1&pageSize=100&type=${type}&k=9191970`, {
+            headers: {
+                'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.2.0","e":"16453564353677531387461633"}',
+                'X-Host': 'mall.film-ticket.film.list'
+            }
+        }).then(res => res.json()).then(res => {
+            console.log(11111, res);
+            this.setState({
+                list: res.data.films
+            })
+        }).catch(err => {
+            console.error('catch', err);
+        }).finally(mse => {
+            console.info('finally', mse);
+        });
+    }
+
+    // 初始化生命周期只执行1次
+    componentDidMount() {
+        this.setState({
+            type: this.props.type
+        })
+        if (this.props.type === 1) {
+            this.getData(1);
+            console.log('请求正在热映数据！');
+        } else {
+            this.getData(2);
+            console.log('请求即将上映数据！');
+        }
+    };
+
+    // 要监听父组件传过来的props状态，可通过UNSAFE_componentWillReceiveProps(nextProps)来获取最新的props状态
+    // 但是：由于UNSAFE_componentWillReceiveProps()在16.2以后就不被推荐使用了，因为它处在diff算法的第一个阶段，会被多次重复执行。
+    // 所以：
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        this.setState({
+            type: nextProps.type
+        })
+        // console.log(666, nextProps.type);
+        if (nextProps.type === 1) {
+            this.getData(1);
+            console.log('请求正在热映数据！');
+        } else {
+            this.getData(2);
+            console.log('请求即将上映数据！');
+        }
+
+    };
+
+    render() {
+        return (
+            <div>
+                {this.state.type}
+                <ul className='film'>
+                    {
+                        this.state.list.map((o, i) => {
+                            return <li key={o.filmId}>
+                                <img src={o.poster} alt={o.name} />
+                                <h4>{o.name}</h4>
+                            </li>
+                        })
+                    }
+                </ul>
+            </div>
+        )
+    }
+}
+
 
 export default class Cwrp extends Component {
 
@@ -76,11 +156,18 @@ export default class Cwrp extends Component {
         obj: {
             num: 1,
             key: 'value'
-        }
+        },
+        type: 1
     };
 
+    setType(type) {
+        this.setState({
+            type
+        })
+    }
+
     render() {
-        return (<>
+        return (<div className='cwrp'>
             <h1>
                 cwrp Props更新时的生命周期函数 <button onClick={() => {
                     const newVal = this.state.current + 1;
@@ -88,25 +175,31 @@ export default class Cwrp extends Component {
                         current: newVal,
                         obj: {
                             num: newVal,
-                            key: 'User'
+                            key: '父组件render()更新时，所有的子组件都会被更新！！'
                         }
                     });
                 }} >更新状态</button>
             </h1>
-            <hr/>
+            <hr />
 
             <br />
             <Child1 ></Child1>
-            <hr/>
+            <hr />
 
             <br />
             <Child2 current={this.state.current} ></Child2>
-            <hr/>
+            <hr />
 
             <br />
             <Child3 obj={this.state.obj} ></Child3>
-            <hr/>
-        </>
-        )
+            <hr />
+
+            <br />
+            <ul className='nav'>
+                <li onClick={() => this.setType(1)}>正在热映</li>
+                <li onClick={() => this.setType(2)}>即将上映</li>
+            </ul>
+            <Child4 type={this.state.type} ></Child4>
+        </div>)
     };
 };

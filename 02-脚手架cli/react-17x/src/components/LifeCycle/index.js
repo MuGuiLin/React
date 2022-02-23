@@ -6,6 +6,7 @@ import './style.css';
 import Scu from './scu性能优化生命周期函数';
 import Cwrp from './cwrp Props更新时的生命周期函数';
 
+
 class LifeCycle extends Component {
 
     constructor(props) {
@@ -13,7 +14,7 @@ class LifeCycle extends Component {
         this.state = {
             count: 0,
             initial: true,
-            update: false
+            update: false,
         }
         console.log('0、定义状态');
     }
@@ -45,11 +46,21 @@ class LifeCycle extends Component {
         this.setState({
             initial: false
         });
+
+        // 注：this.timer 变量不用在this.state中声明，直接挂载在类(类组件)上即可！！
+        this.timer = setInterval(() => {
+            console.log(Date.now());
+        }, 1000)
+
+        this.resize = window.onresize = (evt) => {
+            clearInterval(this.timer);
+            console.log('窗口可视区宽度：', evt.currentTarget.innerWidth);
+        };
     }
 
     //----------------------【组件运行中阶段（4个函数）】----------------------
     // cwrp
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         // 当父组件更新属性时触发，此时子组件中的props也会更新，这里也是最先获取父组件传的属性，可在这里做：用nextProps 来新更this.state中的属性等操作
         console.log('该生命周期方法主要用于在[子组件]中，当父组件更新属性时，重渲染执行render()'); // 父组件状态每更新1次，执行1次
     }
@@ -78,6 +89,7 @@ class LifeCycle extends Component {
     // }
     // cdu
     componentDidUpdate(prevProps, prevState) {
+        // prevProps, prevState // 这是上一次的props 和 state
         console.debug('3、完成更新后的状态挂载到真实DOM中'); // 状态每更新1次，执行1次，当DOM被更新(修改)时触发，可以获取、修改更新后的DOM
     }
 
@@ -85,6 +97,33 @@ class LifeCycle extends Component {
     // cwu
     componentWillUnmount() {
         console.debug('组件即将被销毁！'); // 只执行1次，在删除销毁之前触发，可用于一些清理类操作，如清除定时器、事件监所器等。
+
+        clearInterval(this.timer);
+        // clearTimeout(xxx);
+        // cancelAnimationFrame(xxx);
+        window.onresize = this.resize;
+    }
+
+
+
+
+    //----------------------【React 新生命周期函数】----------------------
+    // gdsfp 这是一个类的静态方法！！所以不能在里面访问this，需要用componentDidUpdate(prevProps, prevState)来配合使用才行。但是在componentDidUpdate()中可能会重复执行(死循环), 可通过条件判断return在阻止重复执行。
+    // 可用于将props 转换为 this.state
+    static getDerivedStateFromProps(nextProps, NextState) {
+        // 这个新有生命周期函数可同时代替 上面老的componentDidMount() 和 componentWillReceiveProps() 两个生命周期函数
+        // 注：getDerivedStateFromProps 新的生命周期函数 不能为老的 componentDidMount() 和 componentWillReceiveProps() 并存，只能二选一哦！！
+        console.log('我是新的生命周期函数: static getDerivedStateFromProps(props, state)')
+        return {
+            nextProps
+        }
+    }
+
+    getSnapshotBeforeUpdate(nextProps, NextState) {
+        console.log('这个新生命周期函数中以访问this', this);
+        return {
+
+        }
     }
 
     render() {
