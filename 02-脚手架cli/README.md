@@ -27,7 +27,9 @@
 	yarn global add create-react-app
 	
 2、创建项目：	
-	create-react-app 项目名 如：my-app 【此时会在当前目录创建一个以上面的项目名为文件夹名的项目文件夹（里面包含相应的资源目录、模块、配置文件等）】
+	create-react-app 项目名 //项目名自定义，如：my-app 【此时会在当前目录创建一个以上面的项目名为文件夹名的项目文件夹（里面包含相应的资源目录、模块、配置文件等）】
+	或：
+	create-react-app 项目名 --template typescript	// 创建ts版的react项目
 	
 3、cd 项目名：
 	cd my-app	// 进入项目根目录
@@ -43,6 +45,8 @@
 ```sh
 1、创建项目：
 	npx create-react-app my-app // my-app可自定义
+	或：
+	npx create-react-app my-app --template typescript // 创建ts版的react项目
 	
 2、cd 项目名：
 	cd my-app	// 进入项目根目录
