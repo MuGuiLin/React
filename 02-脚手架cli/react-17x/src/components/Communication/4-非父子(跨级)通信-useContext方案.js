@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import './style.css'
+import React, { Component, useContext } from 'react'
+import './style.css';
+
 
 const MyContext = React.createContext();  // 创建context对象
 // const { Provider, Consumer } = React.createContext();  // 创建并解构context对象
@@ -9,60 +10,38 @@ const MyContext = React.createContext();  // 创建context对象
  */
 
 // 左侧点击项 受控组件
-class Item extends Component {
+const Item = (props) => {
 
-  // houldComponentUpdate()性能提升、优化生命周期函数
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.filmId !== nextProps.filmId) {
-      return true;
-    }
-    return false;   // 注 这里通过shouldComponentUpdate() 能有效阻止下面的 render()执行了，担阻止不了Consumer中的回调函数(value) => {}
-  }
+  const { poster, name } = props;
 
-  render() {
-    console.error('render被执行了！！');
-    const { poster, name } = this.props;
-    return (
-      // Consumer 销费者
-      <MyContext.Consumer>
-        {
-          // 通过回调函数方式，获取供应商(生产者)传过来的数据、函数等
-          (value) => {
-            console.log('value', value);
-            return (
-              <div className='item' onClick={() => {
-                value.changeInfo(this.props);
-              }}>
-                <img width="100" src={poster} alt={name} />
-                <h5>{name}</h5>
-              </div>)
-          }
-        }
-      </MyContext.Consumer>
-    );
-  };
-}
+  // 通过useContext，获取供应商(生产者)传过来的数据、函数等
+  const value = useContext(MyContext);
+
+  // console.log('useContext', value);
+  return (
+    <div className='item' onClick={() => {
+      value.changeInfo(props);
+    }}>
+      <img width="100" src={poster} alt={name} />
+      <h5>{name}</h5>
+    </div>
+
+  );
+};
+
 
 // 右侧详情 受控组件
-class Info extends Component {
-  render() {
-    return (
-      // Consumer 销费者
-      <MyContext.Consumer>
-        {
-          // 通过回调函数方式，获取供应商(生产者)传过来的数据、函数等
-          ({ info }) => (<article>
-            <h2>{info.name}</h2>
-            <p>出品地方：{info.nation}， 观众评分：{info.grade}， 播放时长: {info.runtime}分钟</p>
-            <section>
-              {info.synopsis}
-            </section>
-          </article>)
-        }
-      </MyContext.Consumer>
-    );
-  };
-}
+const Info = () => {
+  // 通过useContext，获取供应商(生产者)传过来的数据、函数等
+  const { info } = useContext(MyContext);
+  return (<article>
+    <h2>{info.name}</h2>
+    <p>出品地方：{info.nation}， 观众评分：{info.grade}， 播放时长: {info.runtime}分钟</p>
+    <section>
+      {info.synopsis}
+    </section>
+  </article>)
+};
 
 
 export default class Context extends Component {

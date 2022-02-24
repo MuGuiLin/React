@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import Child1 from './1-非父子(跨级)通信-状态提升';
 import Child2 from './2-非父子(跨级)通信-订阅发布模式';
 import Child3 from './3-非父子(跨级)通信-context方案';
-import Child4 from './React插槽';
-import Child5 from './React插槽实例';
+import Child4 from './4-非父子(跨级)通信-useContext方案';
+import Child5 from './React插槽';
+import Child6 from './React插槽实例';
 
 import './index.css';
 
@@ -23,9 +24,12 @@ export default class Communication extends Component {
                 name: 'context方案'
             }, {
                 id: 4,
-                name: 'React插槽'
+                name: 'useContext方案'
             }, {
                 id: 5,
+                name: 'React插槽'
+            }, {
+                id: 6,
                 name: 'React插槽实例'
             }
         ],
@@ -40,6 +44,8 @@ export default class Communication extends Component {
                 return <Child4 />;
             case 4:
                 return <Child5 />;
+            case 5:
+                return <Child6 />;
             default:
                 return <Child1 />;
             // break;

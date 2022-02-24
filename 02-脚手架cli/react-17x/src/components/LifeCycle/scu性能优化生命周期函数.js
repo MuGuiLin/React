@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import './style.css';
 
-class Box extends Component {
+// class Box extends PureComponent {
+    class Box extends PureComponent {
 
     /**
      * scu -> shouldComponentUpdate()性能提升、优化生命周期函数，这也是面试React中经常被问到的一个点。
      *      如果没使用这个方法来阻止一下的话，当父组件状态每更新1次，render()被执行的次数，就是父组件中this.state.list.map的次数，即108次，
      *      即便是当父组件更新的属性不是传给子组件的props中的属性 或者是 父组件根本就没向子组件传任何属性，但子组件还是会被重新渲染一次，
      *      所以shouldComponentUpdate()一般用在子组件中使用
+     * 
+     *      最后：还有一个比shouldComponentUpdate()比简便的性能优化方案就是：PureComponent，这里React自带的，直接引用即可：import React, { PureComponent } from 'react';
+     *      但是：如果props 和 this.state 一直都会变化，那PureComponent也没优化不了什么，因为shallowEqual也需要花时间的。
      * @param {*} nextProps 
      * @returns 
      */
@@ -30,6 +34,7 @@ class Box extends Component {
 };
 
 export default class Scu extends Component {
+// export default class Scu extends PureComponent {
 
     state = {
         list: ' '.repeat(108).split(''),
