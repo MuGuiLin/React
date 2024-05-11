@@ -1,0 +1,26 @@
+{
+  "name": "umi-plugin-demo",
+  "author": "muguilin <muguilin@foxmail.com>",
+  "version": "0.0.1",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build"
+  },
+  "keywords": [],
+  "authors": {
+    "name": "muguilin <muguilin@foxmail.com>",
+    "email": "muguilin@foxmail.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "father": "^4.3.0",
+    "typescript": "^5.1.6",
+    "umi": "^4.0.73"
+  }
+}

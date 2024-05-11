@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基于浏览器&lt;script>引入方式 - JSX</title>
+    <link rel="stylesheet" href="./css/base.css">
+</head>
+
+<body>
+    <h1>基于浏览器&lt;script>引入方式 - JSX</h1>
+    <hr />
+
+    JSX = JavaScript + XML
+
+    <div id="app"></div>
+
+    <!-- react.js 核心库 开发版 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+
+    <!-- react-dom.js 用于和浏览器 dom 相关操作、渲染等 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/18.3.1/umd/react-dom.development.js"></script>
+
+    <!-- babel.js 用于语法转换，把一些特定的语法转换为标准的js语法，如：JSX、TS、ES6/7/8/9 to ES5等 -->
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/babel-standalone/7.0.0-beta.3/babel.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.5/babel.min.js"></script>
+    
+    <!-- type="text/babel" 指定浏览器 通过babel编译后 来执行 -->
+    <script type="text/babel">
+
+        // ReactDOM.render(
+        //     <div>我是div
+        //         <h1 style={{ color: 'red', fontSize: '36px', 'text-align': 'right' }}>我是H1</h1>
+        //         <p>注：JSX最外层只能有一个标签包起来哦</p>
+        //     </div>,
+        //     document.querySelector('#app')
+        // );
+
+        console.log(React.BaseComponent)
+        
+        // 实现拖拽圆点框处图片内容，并获取坐标 功能如下，拖拽图中四个圆点，框出图片中身份证，并实时输出四个点相对于原图坐标位置。（四点连线为不规则矩形）
+        class MarkPosition {
+            constructor() {
+      
+                this.state = {
+                    imgUrl: Test,
+                    scale_width: 1,
+                    scale_height: 1, // 宽高比 初始值为1
+                    startX: 0,
+                    startY: 0, // 被移动点的初始位置 
+                    leftTop: [-5, -5],
+                    rightTop: [795, -5],
+                    leftBottom: [-5, 395],
+                    rightBottom: [795, 395],
+                }
+            }
+            componentDidMount() {
+                // 初始化 画布   画出图片和四个点开始位置
+                this.drawImg()
+            }
+            // 第一步、将图片用canvas画出来
+            drawImg = () => {
+                const { imgUrl } = this.state
+                let img = new Image()
+                img.src = imgUrl
+                img.onload = () => {
+                    this.setState({
+                        scale_width: img.width / 800,
+                        scale_height: img.height / 400
+                    })
+                    this.drawPoint(img)
+                }
+            }
+
+            // 画四个位置点
+            drawPoint = (img) => {
+                const { leftTop, leftBottom, rightTop, rightBottom } = this.state
+
+                // 第二步、画出图片 并缩放
+                let c = document.getElementById('canvas')
+                let ctx = c.getContext('2d')
+                ctx.clearRect(0, 0, c.width, c.height) //清空画布
+                ctx.drawImage(img, 0, 0, 800, 400) //绘制图片
+
+                ctx.beginPath()
+                ctx.moveTo(leftTop[0] + 5, leftTop[1] + 5)
+                ctx.lineTo(rightTop[0] + 5, rightTop[1] + 5)
+                ctx.lineTo(rightBottom[0] + 5, rightBottom[1] + 5)
+                ctx.lineTo(leftBottom[0] + 5, leftBottom[1] + 5)
+                ctx.lineTo(leftTop[0] + 5, leftTop[1] + 5)
+                ctx.strokeStyle = 'red'
+                ctx.stroke()
+            }
+
+            // 拖拽开始
+            dragStart = (position, e) => {
+                this.setState({
+                    startX: e.clientX,
+                    startY: e.clientY
+                })
+
+            }
+
+            // 拖拽结束
+            dragEnd = (position, e) => {
+                const { startX, startY, leftTop, leftBottom, rightTop, rightBottom } = this.state
+                console.log(startX, startY, leftTop, leftBottom, rightTop, rightBottom)
+                let x = e.clientX - startX
+                let y = e.clientY - startY // 计算 X Y 偏移量
+                let width = 795
+                let height = 395 // 元素宽高 减去 圆点半径
+
+                // 处理四个点不能超过自己所在区域 
+                if (position === 'leftTop') {
+                    x = leftTop[0] + Math.min(x, width);
+                    x = x > width / 2 ? x = width / 2 : x;
+                    y = leftTop[1] + Math.min(y, height);
+                    y = y > height / 2 ? y = height / 2 : y;
+                }
+                if (position === 'rightTop') {
+                    x = rightTop[0] + Math.max(x, -width);
+                    x = x < width / 2 ? x = width / 2 : x;
+                    y = rightTop[1] + Math.min(y, height);
+                    y = y > height / 2 ? y = height / 2 : y;
+                }
+                if (position === 'rightBottom') {
+                    x = rightBottom[0] + Math.max(x, -width);
+                    x = x < width / 2 ? x = width / 2 : x;
+                    y = rightBottom[1] + Math.max(y, -height);
+                    y = y < height / 2 ? y = height / 2 : y;
+
+                }
+                if (position === 'leftBottom') {
+                    x = leftBottom[0] + Math.min(x, width);
+                    x = x > width / 2 ? x = width / 2 : x;
+                    y = leftBottom[1] + Math.max(y, -height);
+                    y = y < height / 2 ? y = height / 2 : y;
+                }
+
+                // 限制四个点不能超过画布
+                x = x < -5 ? -5 : x;
+                y = y < -5 ? -5 : y;
+                x = x > width ? width : x;
+                y = y > height ? height : y;
+                this.setState({
+                    [position]: [x, y]
+                })
+
+                // 给元素定位
+                e.target.style.left = `${x}px`
+                e.target.style.top = `${y}px`
+                this.drawImg()
+            }
+
+            render() {
+                const { leftTop, leftBottom, rightTop, rightBottom } = this.state
+                return (
+                    <div className="process-content markposition-content">
+                        <div className='markPic'>
+                            <div
+                                className='left_top round'
+                                draggable
+                                onDragStart={(e) => { this.dragStart('leftTop', e) }}
+                                onDragEnd={(e) => { this.dragEnd('leftTop', e) }}></div>
+                            <div
+                                className='right_top round'
+                                draggable
+                                onDragStart={(e) => { this.dragStart('rightTop', e) }}
+                                onDragEnd={(e) => { this.dragEnd('rightTop', e) }}></div>
+                            <div
+                                className='right_bottom round'
+                                draggable
+                                onDragStart={(e) => { this.dragStart('rightBottom', e) }}
+                                onDragEnd={(e) => { this.dragEnd('rightBottom', e) }}></div>
+                            <div
+                                className='left_bottom round'
+                                draggable
+                                onDragStart={(e) => { this.dragStart('leftBottom', e) }}
+                                onDragEnd={(e) => { this.dragEnd('leftBottom', e) }}></div>
+                            <canvas id="canvas" width="800" height="400"></canvas>
+                        </div>
+                        <Row>
+                            <Col span={6} className='posxy'>左上 X:{leftTop[0]} Y:{leftTop[1]}</Col>
+                            <Col span={6} className='posxy'>右上 X:{rightTop[0]} Y:{rightTop[1]}</Col>
+                            <Col span={6} className='posxy'>右下 X:{rightBottom[0]} Y:{rightBottom[1]}</Col>
+                            <Col span={6} className='posxy'>左下 X:{leftBottom[0]} Y:{leftBottom[1]}</Col>
+                        </Row>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <div className="dom">
+                <MarkPosition />{/*调用类式组件*/}
+            </div>,
+            document.querySelector('#app')
+        );
+    </script>
+</body>
+
+</html>

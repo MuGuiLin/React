@@ -22,6 +22,8 @@
     <script src="./js/react-dom.development.js"></script>
 
     <script>
+        console.log(React)
+        console.log(ReactDOM)
         // React 组件使用一个名为 render() 的方法，接收输入的数据并返回需要展示的内容。在示例中这种类似 XML 的写法被称为 JSX。被传入的数据可在组件中通过 this.props 在 render() 访问。
         ReactDOM.render(
             `React 起源于 Facebook 公司的内项目，在2013年5月开源，是现在前端最流行框架之一，React采用了声明式编程范式，可以更加方便的构建UI应用。
@@ -30,6 +32,7 @@
                     - create-react-app CLI脚手架工具：快速构建项目、打包等；
                     - react-router 基于React 的一个路由高库；
                     - react-redux、redux 状态管理库。
+
             `,
             document.querySelector('#app')
         );
